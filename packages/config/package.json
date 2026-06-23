@@ -1,0 +1,13 @@
+{
+  "name": "@repo/config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./tailwind.preset": "./tailwind.preset.ts",
+    "./tsconfig.base.json": "./tsconfig.base.json"
+  },
+  "files": ["tsconfig.base.json", "tailwind.preset.ts"],
+  "devDependencies": {
+    "tailwindcss": "^3.4.15"
+  }
+}

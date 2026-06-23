@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Lumina Learn — global utilities.
+ * Ported from the <style> blocks across design/screens/*.html.
+ * Keep these in sync with design/design.md (Elevation & Depth, Shapes).
+ */
+
+@layer base {
+  :root {
+    /* Material Symbols default axes */
+    --ms-fill: 0;
+  }
+
+  body {
+    @apply bg-background text-on-surface;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' var(--ms-fill),
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+  .material-symbols-outlined.is-filled {
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+}
+
+@layer components {
+  /* ---- Elevation Level 0: mesh canvas (dashboard.html) ---- */
+  .mesh-bg {
+    background-color: #fcf8ff;
+    background-image:
+      radial-gradient(at 10% 20%, hsla(280, 100%, 90%, 1) 0px, transparent 50%),
+      radial-gradient(at 80% 10%, hsla(200, 100%, 90%, 1) 0px, transparent 50%),
+      radial-gradient(at 90% 80%, hsla(330, 100%, 90%, 1) 0px, transparent 50%),
+      radial-gradient(at 20% 90%, hsla(240, 100%, 90%, 1) 0px, transparent 50%);
+  }
+
+  /* ---- Elevation Level 1: main glass panels ---- */
+  .glass {
+    background: rgba(252, 248, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  }
+
+  /* ---- Elevation Level 2: ambient colored glows ---- */
+  .ambient-glow-primary {
+    box-shadow: 0 0 20px 0 rgba(94, 65, 208, 0.3);
+  }
+  .ambient-glow-secondary {
+    box-shadow: 0 0 20px 0 rgba(163, 51, 108, 0.3);
+  }
+  .ambient-glow-tertiary {
+    box-shadow: 0 0 20px 0 rgba(0, 100, 124, 0.3);
+  }
+  .ambient-glow-pink {
+    box-shadow: 0 0 20px 0 rgba(255, 125, 184, 0.3);
+  }
+
+  /* ---- Mesh gradient cards (word-set tiles) ---- */
+  .mesh-card-1 {
+    background: linear-gradient(135deg, #a3defe 0%, #ffb0cf 100%);
+  }
+  .mesh-card-2 {
+    background: linear-gradient(135deg, #cabeff 0%, #ff7db8 100%);
+  }
+  .mesh-card-3 {
+    background: linear-gradient(135deg, #b7eaff 0%, #cabeff 100%);
+  }
+
+  /*
+   * Sidebar active "cut-out" tab (dashboard.html / profile.html).
+   * The ::before/::after draw the inverted-radius notches that blend the
+   * active pill into the canvas. The notch color MUST match the canvas (#fcf8ff).
+   */
+  .sidebar-active-tab {
+    @apply relative ml-4 flex items-center rounded-l-full bg-surface py-3 pl-6 font-bold text-on-surface;
+  }
+  .sidebar-active-tab::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -20px;
+    height: 20px;
+    width: 20px;
+    border-bottom-right-radius: 9999px;
+    box-shadow: 10px 10px 0 10px #fcf8ff;
+  }
+  .sidebar-active-tab::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    height: 20px;
+    width: 20px;
+    border-top-right-radius: 9999px;
+    box-shadow: 10px -10px 0 10px #fcf8ff;
+  }
+}
+
+/* ---- Custom scrollbar (statistics.html) ---- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #dad8e9;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9c4d7;
+}

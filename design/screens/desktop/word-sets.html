@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LinguoFlow - Word Sets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#a3336c",
+                        "inverse-on-surface": "#f2efff",
+                        "surface-container-highest": "#e3e0f2",
+                        "on-secondary-container": "#780b4a",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#1a1a27",
+                        "surface-variant": "#e3e0f2",
+                        "surface": "#fcf8ff",
+                        "outline-variant": "#c9c4d7",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001f28",
+                        "on-surface": "#1a1a27",
+                        "inverse-surface": "#2f2f3c",
+                        "outline": "#797586",
+                        "on-primary-fixed-variant": "#4825ba",
+                        "inverse-primary": "#cabeff",
+                        "surface-container-high": "#e9e6f8",
+                        "on-surface-variant": "#484554",
+                        "on-error": "#ffffff",
+                        "primary-container": "#775ceb",
+                        "tertiary-fixed": "#b7eaff",
+                        "on-secondary-fixed-variant": "#841853",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#ff7db8",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e6deff",
+                        "background": "#fcf8ff",
+                        "tertiary-container": "#007f9d",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-dim": "#dad8e9",
+                        "on-tertiary-container": "#fafdff",
+                        "surface-container": "#eeecfe",
+                        "on-primary-fixed": "#1c0062",
+                        "tertiary": "#00647c",
+                        "surface-tint": "#6043d3",
+                        "primary-fixed-dim": "#cabeff",
+                        "on-tertiary-fixed-variant": "#004e61",
+                        "secondary-fixed": "#ffd9e5",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#5bd5fc",
+                        "secondary-fixed-dim": "#ffb0cf",
+                        "primary": "#5e41d0",
+                        "on-secondary-fixed": "#3d0023"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "sidebar-width": "260px",
+                        "container-padding": "32px",
+                        "gutter": "24px",
+                        "card-gap": "20px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "display": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f2efff; /* Subtle background matching the visual */
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0.05) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,0.05) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,0.05) 0, transparent 50%);
+        }
+        .glass-panel {
+            background: rgba(252, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .ambient-shadow {
+            box-shadow: 0 10px 30px -10px var(--tw-shadow-color);
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body-md h-screen overflow-hidden flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-inverse-surface dark:bg-inverse-surface shadow-xl w-sidebar-width h-full fixed left-0 top-0 flex flex-col h-screen py-8 z-50">
+<div class="px-6 mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed text-3xl font-variation-settings: 'FILL' 1;">language</span>
+<span class="font-display text-display text-primary-fixed" style="font-size: 24px;">LinguoFlow</span>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-2">
+<li>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-4">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="bg-surface text-on-surface rounded-l-full ml-4 py-3 pl-6 relative after:content-[''] after:absolute after:right-0 after:top-[-20px] after:h-[20px] after:w-[20px] after:rounded-br-full after:shadow-[10px_10px_0_10px_#fcf8ff] before:content-[''] before:absolute before:right-0 before:bottom-[-20px] before:h-[20px] before:w-[20px] before:rounded-tr-full before:shadow-[10px_-10px_0_10px_#fcf8ff] flex items-center transition-all duration-300 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-4" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                        Word Sets
+                    </a>
+</li>
+<li>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-4">query_stats</span>
+                        Progress
+                    </a>
+</li>
+<li>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-4">group</span>
+                        Community
+                    </a>
+</li>
+<li>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-4">settings</span>
+                        Settings
+                    </a>
+</li>
+</ul>
+</div>
+<div class="px-6 mt-auto">
+<div class="bg-primary/20 rounded-xl p-4 text-center border border-primary/30 relative overflow-hidden">
+<div class="relative z-10">
+<p class="text-primary-fixed font-label-bold text-label-bold mb-1">Upgrade to Pro</p>
+<p class="text-outline-variant font-label-sm text-label-sm mb-3">Unlock premium features.</p>
+<button class="bg-gradient-to-r from-primary to-secondary text-white font-label-bold text-label-bold py-2 px-4 rounded-full w-full shadow-lg hover:shadow-xl transition-all">Upgrade</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] flex-1 h-screen flex flex-col relative z-0">
+<!-- TopNavBar (from JSON) -->
+<header class="bg-surface/70 dark:bg-surface-container/70 backdrop-blur-xl h-20 w-[calc(100%-260px)] fixed right-0 top-0 z-40 border-b border-white/20 shadow-sm flex justify-between items-center px-container-padding transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-4">
+<div class="flex gap-2 text-outline">
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+<div class="relative focus-within:ring-2 focus-within:ring-primary/50 transition-all rounded-full bg-surface-container-highest/50 flex items-center px-4 py-2 w-64 shadow-inner border border-white/30">
+<span class="material-symbols-outlined text-outline-variant mr-2">search</span>
+<input class="bg-transparent border-none outline-none text-body-md font-body-md text-on-surface w-full placeholder-outline-variant focus:ring-0" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low transition-colors rounded-full relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-white shadow-sm ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A detailed, vibrant 3D avatar of a smiling young woman with glasses, stylized in a soft, bubbly, high-key lighting style typical of modern playful educational apps. The background of the avatar is a soft pink-to-blue gradient." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATluL8SnAl52Ms9qKebDBr6dNkvkQCJCscsVKEfAglx-pSYjV1C9Wjf1V7dlBRzIqAbvWyE5BOEMWZ5JETkFTgWHd4vQLp3bGeADMw_M_yZvF_rOAOmH5riO182g35JG-31C8ktA8p_aD2rVSkdu5eR4v0nI2wdv9WndWY8nMIyHxRWw0r9I84VH52wqXP17klt8rnlfJYaryccbB1_qimxycHhXL3z00iNFFdVg-pYKMTRJBKmeuvpcHvWxplSkJZz4bIIVCws67i"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 mt-20 p-container-padding overflow-y-auto">
+<div class="max-w-6xl mx-auto">
+<div class="flex justify-between items-end mb-6">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Word Sets</h1>
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container-lowest rounded-full shadow-sm text-outline hover:text-primary transition-colors border border-white"><span class="material-symbols-outlined">filter_list</span></button>
+<button class="p-2 bg-surface-container-lowest rounded-full shadow-sm text-outline hover:text-primary transition-colors border border-white"><span class="material-symbols-outlined">sort</span></button>
+</div>
+</div>
+<!-- Word Sets Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-card-gap mb-12">
+<!-- Card 1 -->
+<div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 relative group h-56 cursor-pointer ambient-shadow shadow-primary/30">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-fixed-dim to-secondary-container opacity-80"></div>
+<div class="absolute inset-0 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl"></div>
+<div class="relative h-full flex flex-col justify-between p-6 z-10">
+<div class="flex justify-between items-start">
+<div class="w-20 h-20 flex items-center justify-center">
+<img alt="Books" class="w-full h-full object-contain drop-shadow-xl" data-alt="A detailed, soft 3D render of a stack of colorful books, floating slightly. The style is playful, high-key lighting, bubbly glassmorphism aesthetic suitable for an educational app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtxK4UNbVhda9pT__JegNvy58bz_T6UO0dYNVzSLpkmu9Rm_42XqiRXLDrzry8NgRSwxluJE8OOznY66jcE8hB_oQycLvVnv_cT5rl03UfCnyzqVvnRkAtwjDRwH8rf-COqdt3u4-HogovcU4fMLH8B9Q74EvPKnnU8QJmE_vLGINS7j1riSoOEIvi4gE5il09XUh3HI-BW5Q1xA1Qs7gCvBj90ITeyUz0rk-t9VqH03DGsaUPsKyIfTe2dHw_2n1mWnFtn1y0L68Z"/>
+</div>
+<button class="text-white/70 hover:text-white transition-colors p-1"><span class="material-symbols-outlined">favorite</span></button>
+</div>
+<div>
+<h3 class="text-white font-headline-md text-headline-md leading-tight mb-1">Books and Library</h3>
+<p class="text-white/80 font-label-sm text-label-sm">45 Words • Intermediate</p>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 relative group h-56 cursor-pointer ambient-shadow shadow-primary/40">
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-80"></div>
+<div class="absolute inset-0 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl"></div>
+<div class="relative h-full flex flex-col justify-between p-6 z-10">
+<div class="flex justify-between items-start">
+<div class="w-20 h-20 flex items-center justify-center">
+<img alt="Globe" class="w-full h-full object-contain drop-shadow-xl" data-alt="A detailed, soft 3D render of a stylized globe on a small stand. The colors are vibrant pastels. The style is playful, high-key lighting, bubbly glassmorphism aesthetic suitable for an educational app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4lQRlyjtDlGjA7J_eZYK_ZjA1gcGX269D0Naqi88fntgYrWLWPp1hBWfZtrLdGvvYoXb7c0DAHuoA_cQsgdiCcszmOsgZBlO2TR4cBnR1jAfqAex4fT6QNOHE_Sp3YjRp5Dh-lZYsGOBWk63KFn5E6QzHqjbFbOZs2kXmU37BWQgBWo1QW_ERPw8HpoCDM3haaUpC4VXoUfFwHGQ1_YPfdWkKalaWuEHQWjgCf10EokRR4mvGuZDL33Ivlvz2MtHJo8yDw08faPFE"/>
+</div>
+<button class="text-white transition-colors p-1"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span></button>
+</div>
+<div>
+<h3 class="text-white font-headline-md text-headline-md leading-tight mb-1">Countries and cities</h3>
+<p class="text-white/80 font-label-sm text-label-sm">120 Words • Beginner</p>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 relative group h-56 cursor-pointer ambient-shadow shadow-tertiary/30">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-fixed-dim to-primary-container opacity-80"></div>
+<div class="absolute inset-0 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl"></div>
+<div class="relative h-full flex flex-col justify-between p-6 z-10">
+<div class="flex justify-between items-start">
+<div class="w-20 h-20 flex items-center justify-center">
+<img alt="Clock" class="w-full h-full object-contain drop-shadow-xl" data-alt="A detailed, soft 3D render of a colorful analog clock. The style is playful, high-key lighting, bubbly glassmorphism aesthetic suitable for an educational app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOmC_svNthpuPOZkuR1SKYyiqeM4-VlF72qT9anCMdWwBC8OjFuxQU42cLE05bOP3-KvBKNFj_lKKWUdbZ9_DBJEirN0AndIfN_dgZ0jEUzPqxfxO-3M5MjckPIhvF3A8rRlGU2Vvbolg1mG8HwYWcFmcQn47GHf0xIr0oqO9b6WtAhGl_SS8gc3gQIP2IE4Y4A7rU3Q8xlID9Jae4svFu4pHRQWXKPXaqSVVOez6KATRJa2zbzRXpG5Gi5EVZf8vSQyZqkZNScKyA"/>
+</div>
+<button class="text-white/70 hover:text-white transition-colors p-1"><span class="material-symbols-outlined">favorite</span></button>
+</div>
+<div>
+<h3 class="text-white font-headline-md text-headline-md leading-tight mb-1">What is o'clock now?</h3>
+<p class="text-white/80 font-label-sm text-label-sm">30 Words • Beginner</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Statistics Placeholder -->
+<div class="lg:col-span-2 glass-panel rounded-xl p-6 shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Weekly Goal</h2>
+<div class="bg-surface-container-low rounded-full px-3 py-1 text-label-sm font-label-bold text-primary">On Track</div>
+</div>
+<div class="flex items-center justify-center h-48 border-2 border-dashed border-outline-variant/30 rounded-lg bg-surface-bright/50">
+<p class="text-outline font-body-md text-center">Interactive chart visualization would go here.<br/><span class="text-label-sm">Learning curve tracking</span></p>
+</div>
+</div>
+<!-- Side Widget -->
+<div class="glass-panel rounded-xl p-6 shadow-sm flex flex-col items-center text-center">
+<div class="w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mb-4 shadow-lg shadow-primary/20 text-white">
+<span class="material-symbols-outlined text-4xl">emoji_events</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Keep it up!</h3>
+<p class="font-body-md text-on-surface-variant mb-6">You've learned 15 new words this week. Your streak is growing.</p>
+<button class="bg-surface-container-highest hover:bg-primary-fixed transition-colors text-primary font-label-bold text-label-bold py-2 px-6 rounded-full w-full border border-white/50 shadow-sm">Review Now</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

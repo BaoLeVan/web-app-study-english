@@ -1,0 +1,236 @@
+// LinguoFlow — Prisma schema
+// Core domain: users, content+subtitles, vocabulary, SRS, practice attempts, progress.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Level {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum ContentType {
+  YOUTUBE
+  UPLOAD
+}
+
+enum ReviewResult {
+  REMEMBERED
+  FORGOT
+}
+
+enum PracticeMode {
+  SPEAKING
+  LISTENING
+  WRITING
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  settings         UserSettings?
+  words            UserWord[]
+  contents         Content[]
+  speakingAttempts SpeakingAttempt[]
+  dictationAttempts DictationAttempt[]
+  progress         Progress?
+  achievements     UserAchievement[]
+  refreshTokens    RefreshToken[]
+}
+
+model UserSettings {
+  id                   String  @id @default(cuid())
+  userId               String  @unique
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nativeLang           String  @default("vi")
+  level                Level   @default(BEGINNER)
+  /// Local "HH:mm" the daily review reminder fires.
+  reminderTime         String  @default("20:00")
+  notificationsEnabled Boolean @default(false)
+  /// Web Push subscription JSON (endpoint + keys), null until granted.
+  pushSubscription     Json?
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Content {
+  id         String      @id @default(cuid())
+  ownerId    String
+  owner      User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  title      String
+  type       ContentType
+  /// YouTube URL or null for uploads.
+  youtubeUrl String?
+  /// Object-storage key for uploaded video, null for YouTube.
+  fileKey    String?
+  level      Level       @default(BEGINNER)
+  /// Duration in milliseconds (filled after media processing).
+  durationMs Int?
+  createdAt  DateTime    @default(now())
+
+  subtitles Subtitle[]
+  cues      SubtitleCue[]
+
+  @@index([ownerId])
+  @@index([level])
+}
+
+model Subtitle {
+  id        String   @id @default(cuid())
+  contentId String
+  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  lang      String
+  createdAt DateTime @default(now())
+
+  @@unique([contentId, lang])
+}
+
+/// One sentence-level cue used to slice video and drive interactive subtitles.
+model SubtitleCue {
+  id        String  @id @default(cuid())
+  contentId String
+  content   Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  index     Int
+  startMs   Int
+  endMs     Int
+  text      String
+  /// Optional translated (Vietnamese) line for bilingual display.
+  textVi    String?
+
+  speakingAttempts  SpeakingAttempt[]
+  dictationAttempts DictationAttempt[]
+
+  @@index([contentId, index])
+}
+
+model Topic {
+  id    String     @id @default(cuid())
+  name  String     @unique
+  icon  String?
+  words UserWord[]
+}
+
+/// A vocabulary entry in a user's personal store.
+model UserWord {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  term      String
+  ipa       String?
+  meaningVi String
+  imageUrl  String?
+  audioUrl  String?
+  /// Real-world example sentence (context the word was captured from).
+  context   String?
+  topicId   String?
+  topic     Topic?   @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+
+  schedule ReviewSchedule?
+
+  @@unique([userId, term])
+  @@index([userId])
+}
+
+/// SRS state (SM-2 variant) — one row per UserWord.
+model ReviewSchedule {
+  id           String        @id @default(cuid())
+  userWordId   String        @unique
+  userWord     UserWord      @relation(fields: [userWordId], references: [id], onDelete: Cascade)
+  intervalDays Int           @default(0)
+  easeFactor   Float         @default(2.5)
+  repetitions  Int           @default(0)
+  nextReviewAt DateTime      @default(now())
+  lastResult   ReviewResult?
+  lastReviewAt DateTime?
+
+  @@index([nextReviewAt])
+}
+
+model SpeakingAttempt {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cueId               String
+  cue                 SubtitleCue @relation(fields: [cueId], references: [id], onDelete: Cascade)
+  recordingKey        String?
+  accuracyScore       Float?
+  fluencyScore        Float?
+  completenessScore   Float?
+  pronunciationScore  Float?
+  /// Per-word scores from Azure Pronunciation Assessment.
+  wordScores          Json?
+  createdAt           DateTime @default(now())
+
+  @@index([userId])
+}
+
+model DictationAttempt {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cueId     String
+  cue       SubtitleCue @relation(fields: [cueId], references: [id], onDelete: Cascade)
+  mode      PracticeMode @default(WRITING)
+  userInput String
+  correct   Boolean
+  hintsUsed Int         @default(0)
+  createdAt DateTime    @default(now())
+
+  @@index([userId])
+}
+
+model Progress {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonsDone   Int      @default(0)
+  wordsLearned  Int      @default(0)
+  currentStreak Int      @default(0)
+  longestStreak Int      @default(0)
+  totalPoints   Int      @default(0)
+  lastActiveAt  DateTime?
+}
+
+model Achievement {
+  id          String @id @default(cuid())
+  code        String @unique
+  title       String
+  description String
+  icon        String
+
+  users UserAchievement[]
+}
+
+model UserAchievement {
+  id            String      @id @default(cuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementId String
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  unlockedAt    DateTime    @default(now())
+
+  @@unique([userId, achievementId])
+}

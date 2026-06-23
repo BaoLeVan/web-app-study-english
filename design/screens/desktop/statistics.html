@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LinguoFlow - Progress</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#a3336c",
+                        "inverse-on-surface": "#f2efff",
+                        "surface-container-highest": "#e3e0f2",
+                        "on-secondary-container": "#780b4a",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#1a1a27",
+                        "surface-variant": "#e3e0f2",
+                        "surface": "#fcf8ff",
+                        "outline-variant": "#c9c4d7",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001f28",
+                        "on-surface": "#1a1a27",
+                        "inverse-surface": "#2f2f3c",
+                        "outline": "#797586",
+                        "on-primary-fixed-variant": "#4825ba",
+                        "inverse-primary": "#cabeff",
+                        "surface-container-high": "#e9e6f8",
+                        "on-surface-variant": "#484554",
+                        "on-error": "#ffffff",
+                        "primary-container": "#775ceb",
+                        "tertiary-fixed": "#b7eaff",
+                        "on-secondary-fixed-variant": "#841853",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#ff7db8",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e6deff",
+                        "background": "#fcf8ff",
+                        "tertiary-container": "#007f9d",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-dim": "#dad8e9",
+                        "on-tertiary-container": "#fafdff",
+                        "surface-container": "#eeecfe",
+                        "on-primary-fixed": "#1c0062",
+                        "tertiary": "#00647c",
+                        "surface-tint": "#6043d3",
+                        "primary-fixed-dim": "#cabeff",
+                        "on-tertiary-fixed-variant": "#004e61",
+                        "secondary-fixed": "#ffd9e5",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#5bd5fc",
+                        "secondary-fixed-dim": "#ffb0cf",
+                        "primary": "#5e41d0",
+                        "on-secondary-fixed": "#3d0023"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "sidebar-width": "260px",
+                        "container-padding": "32px",
+                        "gutter": "24px",
+                        "card-gap": "20px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "display": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .mesh-bg {
+            background-color: #fcf8ff;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        
+        .ambient-glow-primary {
+            box-shadow: 0 0 20px 0 rgba(94, 65, 208, 0.3);
+        }
+
+        .ambient-glow-secondary {
+            box-shadow: 0 0 20px 0 rgba(163, 51, 108, 0.3);
+        }
+        
+        .ambient-glow-tertiary {
+            box-shadow: 0 0 20px 0 rgba(0, 100, 124, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dad8e9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c9c4d7;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden mesh-bg">
+<!-- SideNavBar -->
+<nav class="w-sidebar-width h-full fixed left-0 top-0 bg-inverse-surface dark:bg-inverse-surface text-primary dark:text-primary-fixed-dim font-body-md shadow-xl flex flex-col h-screen py-8 z-50">
+<div class="px-6 mb-12 flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xl">L</div>
+<div>
+<h1 class="font-display text-display text-primary-fixed text-2xl">LinguoFlow</h1>
+<p class="text-inverse-primary text-xs opacity-80">Master English</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Dashboard -->
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<!-- Word Sets -->
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="menu_book">menu_book</span>
+                Word Sets
+            </a>
+<!-- Progress (Active) -->
+<a class="bg-surface text-on-surface rounded-l-full ml-4 py-3 pl-6 relative after:content-[''] after:absolute after:right-0 after:top-[-20px] after:h-[20px] after:w-[20px] after:rounded-br-full after:shadow-[10px_10px_0_10px_#fcf8ff] before:content-[''] before:absolute before:right-0 before:bottom-[-20px] before:h-[20px] before:w-[20px] before:rounded-tr-full before:shadow-[10px_-10px_0_10px_#fcf8ff] flex items-center transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4 text-primary" data-icon="query_stats" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="font-bold">Progress</span>
+</a>
+<!-- Community -->
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="group">group</span>
+                Community
+            </a>
+<!-- Settings -->
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed transition-all duration-300 ease-in-out mt-auto" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+<div class="px-6 mt-8">
+<div class="bg-surface/10 rounded-2xl p-4 text-center backdrop-blur-md border border-white/10">
+<div class="w-12 h-12 bg-gradient-to-br from-secondary-container to-primary-container rounded-full mx-auto mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h3 class="text-white font-bold mb-1">Upgrade to PRO</h3>
+<p class="text-inverse-primary text-xs mb-3">Unlock premium features for free.</p>
+<button class="w-full bg-gradient-to-r from-primary to-secondary text-white rounded-full py-2 text-sm font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                    Upgrade to Pro
+                </button>
+</div>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="h-20 w-[calc(100%-260px)] fixed right-0 top-0 z-40 bg-surface/70 dark:bg-surface-container/70 backdrop-blur-xl text-primary dark:text-primary-fixed-dim font-label-bold flex justify-between items-center px-container-padding">
+<!-- Search -->
+<div class="relative w-64 focus-within:ring-2 focus-within:ring-primary/50 transition-all rounded-full bg-white/50 border border-white/40 shadow-sm flex items-center px-4 py-2">
+<span class="material-symbols-outlined text-outline mr-2 text-lg" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none text-sm w-full text-on-surface placeholder:text-outline-variant" placeholder="Search..." type="text"/>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-6">
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30">
+<div class="text-right">
+<p class="text-on-surface font-bold text-sm">Annie Leonchart</p>
+<p class="text-outline text-xs font-normal">annie_leonchart@mail.com</p>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A highly detailed, playful 3D avatar of a young woman with glasses, smiling and winking, rendered in a bright, modern, and cheerful style consistent with a language learning app's aesthetic. The avatar is set against a soft, vibrant pastel background, exuding an optimistic and high-energy learning mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_IyA46-QmCWDSasoqvzPbYZXSyQPcKvKriwfQZfLy4vrpxlNcEJdHh-0ma6MITbUxFSM_KzFlx_i8FXTxlj89la-sPVjJjNQoSRAILST2rVni87li98rR5DHRpE0gJeQLWL_yoNShPoMDeuAgvUwYywQAhHN4505hmSmZmfmiACCr16-BSSgptO3Z0kRyH7aNdhVmIMrjHzRQ0AKSmq2LH1wH6dWqBvUn_isNYH7cOG9JnJcCnInS3HXPt99bcVU5Pvn4NNe3KcHp"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] pt-28 px-container-padding pb-12 w-full h-screen overflow-y-auto">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Statistics &amp; Progress</h2>
+<p class="text-on-surface-variant font-body-md">Track your language learning journey.</p>
+</div>
+<div class="flex gap-4">
+<select class="bg-white/60 border border-white/50 text-on-surface rounded-full px-4 py-2 text-sm font-medium focus:ring-2 focus:ring-primary/50 outline-none backdrop-blur-md">
+<option>Last 30 Days</option>
+<option>This Year</option>
+<option>All Time</option>
+</select>
+</div>
+</div>
+<!-- Summary Cards Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="glass-card rounded-2xl p-6 ambient-glow-primary flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<span class="bg-surface-container-high text-primary px-2 py-1 rounded-md text-xs font-bold">+12%</span>
+</div>
+<div>
+<p class="text-outline text-sm font-medium mb-1">Lessons Completed</p>
+<h3 class="font-display text-3xl text-on-surface">128</h3>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-2xl p-6 ambient-glow-secondary flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="translate" style="font-variation-settings: 'FILL' 1;">translate</span>
+</div>
+<span class="bg-surface-container-high text-secondary px-2 py-1 rounded-md text-xs font-bold">+45</span>
+</div>
+<div>
+<p class="text-outline text-sm font-medium mb-1">Words Learned</p>
+<h3 class="font-display text-3xl text-on-surface">1,402</h3>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-2xl p-6 ambient-glow-tertiary flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<span class="bg-surface-container-high text-tertiary px-2 py-1 rounded-md text-xs font-bold">Active</span>
+</div>
+<div>
+<p class="text-outline text-sm font-medium mb-1">Current Streak</p>
+<h3 class="font-display text-3xl text-on-surface">14 Days</h3>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 z-0"></div>
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-surface" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div>
+<p class="text-outline text-sm font-medium mb-1">Total Points</p>
+<h3 class="font-display text-3xl text-on-surface">4,850</h3>
+</div>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Main Chart: Learning Progress -->
+<div class="lg:col-span-2 glass-card rounded-2xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Learning Progress</h3>
+<div class="flex gap-2">
+<span class="flex items-center text-xs font-medium text-outline"><div class="w-2 h-2 rounded-full bg-primary mr-1"></div> Accuracy</span>
+<span class="flex items-center text-xs font-medium text-outline"><div class="w-2 h-2 rounded-full bg-secondary mr-1"></div> Fluency</span>
+</div>
+</div>
+<!-- Simulated Chart Area -->
+<div class="flex-grow relative min-h-[300px] w-full border-b border-l border-outline-variant/30 pb-6 pl-4">
+<!-- Y-Axis Labels -->
+<div class="absolute left-[-20px] top-0 bottom-6 flex flex-col justify-between text-xs text-outline-variant font-medium">
+<span>100</span>
+<span>75</span>
+<span>50</span>
+<span>25</span>
+<span>0</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 bottom-6 left-4 flex flex-col justify-between">
+<div class="w-full h-[1px] bg-outline-variant/10"></div>
+<div class="w-full h-[1px] bg-outline-variant/10"></div>
+<div class="w-full h-[1px] bg-outline-variant/10"></div>
+<div class="w-full h-[1px] bg-outline-variant/10"></div>
+<div class="w-full h-[1px] bg-outline-variant/10"></div>
+</div>
+<!-- SVG Paths simulating chart lines -->
+<div class="absolute inset-0 bottom-6 left-4 overflow-hidden">
+<svg class="w-full h-full preserve-aspect-ratio-none" viewbox="0 0 1000 300">
+<!-- Line 1 (Primary) -->
+<path class="drop-shadow-[0_4px_8px_rgba(94,65,208,0.3)]" d="M0,250 C150,250 250,150 400,180 C550,210 650,50 800,100 C900,130 950,200 1000,180" fill="none" stroke="#5e41d0" stroke-linecap="round" stroke-width="4"></path>
+<!-- Line 2 (Secondary) -->
+<path class="drop-shadow-[0_4px_8px_rgba(163,51,108,0.3)]" d="M0,180 C150,200 200,280 350,250 C500,220 600,100 750,150 C850,180 950,100 1000,120" fill="none" stroke="#a3336c" stroke-linecap="round" stroke-width="4"></path>
+<!-- Data Point Highlight -->
+<circle cx="800" cy="100" fill="#fcf8ff" r="6" stroke="#5e41d0" stroke-width="3"></circle>
+</svg>
+</div>
+<!-- Tooltip overlay -->
+<div class="absolute top-[60px] left-[78%] bg-inverse-surface text-inverse-on-surface px-3 py-2 rounded-lg text-xs font-bold shadow-lg transform -translate-x-1/2">
+                            85% Accuracy
+                            <div class="absolute bottom-[-4px] left-1/2 transform -translate-x-1/2 w-2 h-2 bg-inverse-surface rotate-45"></div>
+</div>
+<!-- X-Axis Labels -->
+<div class="absolute bottom-0 left-4 right-0 flex justify-between text-xs text-outline-variant font-medium pt-2">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+</div>
+<!-- Secondary Chart: Vocabulary Growth -->
+<div class="glass-card rounded-2xl p-6 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Vocabulary Growth</h3>
+<div class="flex-grow flex flex-col justify-end gap-3 pb-2">
+<!-- Bar Chart Rows -->
+<div class="flex items-center gap-3">
+<span class="w-8 text-xs text-outline font-medium text-right">Nouns</span>
+<div class="flex-grow h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[85%] relative">
+<div class="absolute inset-0 bg-white/20 w-1/2 rounded-full"></div>
+</div>
+</div>
+<span class="w-8 text-xs text-on-surface font-bold">85%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-8 text-xs text-outline font-medium text-right">Verbs</span>
+<div class="flex-grow h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full w-[60%] relative">
+<div class="absolute inset-0 bg-white/20 w-1/2 rounded-full"></div>
+</div>
+</div>
+<span class="w-8 text-xs text-on-surface font-bold">60%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-8 text-xs text-outline font-medium text-right">Adjs</span>
+<div class="flex-grow h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full w-[45%] relative">
+<div class="absolute inset-0 bg-white/20 w-1/2 rounded-full"></div>
+</div>
+</div>
+<span class="w-8 text-xs text-on-surface font-bold">45%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-8 text-xs text-outline font-medium text-right">Idioms</span>
+<div class="flex-grow h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full w-[20%] relative">
+<div class="absolute inset-0 bg-white/20 w-1/2 rounded-full"></div>
+</div>
+</div>
+<span class="w-8 text-xs text-on-surface font-bold">20%</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/30">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-xs text-outline">Total Words</p>
+<p class="font-bold text-lg text-on-surface">1,402</p>
+</div>
+<button class="text-primary text-sm font-bold hover:underline flex items-center">
+                                View Details <span class="material-symbols-outlined text-sm ml-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Recent Achievements -->
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Recent Achievements</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Achievement 1 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 hover:-translate-y-1 transition-transform cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-200 to-yellow-500 p-1 shadow-lg flex-shrink-0">
+<div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-yellow-500 text-2xl" data-icon="emoji_events" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Grammar Guru</h4>
+<p class="text-xs text-outline-variant mt-1">Completed 50 grammar lessons with 90%+ accuracy.</p>
+</div>
+</div>
+<!-- Achievement 2 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 hover:-translate-y-1 transition-transform cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-300 to-blue-600 p-1 shadow-lg flex-shrink-0">
+<div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-500 text-2xl" data-icon="public" style="font-variation-settings: 'FILL' 1;">public</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Global Citizen</h4>
+<p class="text-xs text-outline-variant mt-1">Mastered the 'Countries and Cities' vocabulary set.</p>
+</div>
+</div>
+<!-- Achievement 3 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 hover:-translate-y-1 transition-transform cursor-pointer opacity-70 grayscale">
+<div class="w-14 h-14 rounded-full bg-surface-dim p-1 shadow-inner flex-shrink-0">
+<div class="w-full h-full bg-surface rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-2xl" data-icon="lock">lock</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Polyglot Path</h4>
+<p class="text-xs text-outline-variant mt-1">Maintain a 30-day streak to unlock.</p>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-outline w-[45%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

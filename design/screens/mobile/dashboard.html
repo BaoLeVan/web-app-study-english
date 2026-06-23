@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LinguoFlow Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#cabeff",
+                        "outline": "#797586",
+                        "surface-container-high": "#e9e6f8",
+                        "secondary-fixed": "#ffd9e5",
+                        "tertiary": "#00647c",
+                        "surface-bright": "#fcf8ff",
+                        "surface": "#fcf8ff",
+                        "surface-container-low": "#f5f2ff",
+                        "on-secondary-container": "#780b4a",
+                        "on-surface": "#1a1a27",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f2efff",
+                        "secondary-container": "#ff7db8",
+                        "on-primary-fixed-variant": "#4825ba",
+                        "primary-fixed": "#e6deff",
+                        "inverse-surface": "#2f2f3c",
+                        "on-tertiary-container": "#fafdff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#004e61",
+                        "primary-container": "#775ceb",
+                        "tertiary-fixed": "#b7eaff",
+                        "on-secondary-fixed": "#3d0023",
+                        "on-surface-variant": "#484554",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#5bd5fc",
+                        "tertiary-container": "#007f9d",
+                        "secondary": "#a3336c",
+                        "background": "#fcf8ff",
+                        "secondary-fixed-dim": "#ffb0cf",
+                        "on-background": "#1a1a27",
+                        "primary": "#5e41d0",
+                        "on-tertiary-fixed": "#001f28",
+                        "surface-container": "#eeecfe",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#1c0062",
+                        "surface-tint": "#6043d3",
+                        "outline-variant": "#c9c4d7",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e3e0f2",
+                        "inverse-primary": "#cabeff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dad8e9",
+                        "surface-variant": "#e3e0f2",
+                        "on-secondary-fixed-variant": "#841853"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-padding": "32px",
+                        "unit": "8px",
+                        "card-gap": "20px",
+                        "sidebar-width": "260px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "display": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(121, 117, 134, 0.1);
+        }
+        
+        .mesh-bg {
+            background: radial-gradient(at 0% 0%, #cabeff 0px, transparent 50%),
+                        radial-gradient(at 100% 0%, #ffb0cf 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, #e6deff 0px, transparent 50%),
+                        radial-gradient(at 0% 100%, #fcf8ff 0px, transparent 50%);
+            background-size: 100% 100%;
+        }
+
+        .ambient-glow-primary {
+            box-shadow: 0 20px 40px -10px rgba(94, 65, 208, 0.3);
+        }
+
+        .ambient-glow-secondary {
+            box-shadow: 0 20px 40px -10px rgba(163, 51, 108, 0.3);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Inverted radius for sidebar active state as per brand guide */
+        .sidebar-active-pill {
+            position: relative;
+            background: #fcf8ff;
+            color: #1a1a27;
+            border-radius: 9999px 0 0 9999px;
+            margin-left: 16px;
+            padding-left: 24px;
+        }
+
+        .sidebar-active-pill::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -20px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-radius: 0 0 20px 0;
+            box-shadow: 5px 5px 0 5px #fcf8ff;
+        }
+
+        .sidebar-active-pill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -20px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-radius: 0 20px 0 0;
+            box-shadow: 5px -5px 0 5px #fcf8ff;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c9c4d7;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-surface overflow-hidden h-screen flex">
+<!-- Desktop Navigation Drawer (The Anchor) -->
+<aside class="hidden md:flex flex-col w-sidebar bg-inverse-surface h-full py-8 text-outline-variant/70 z-30">
+<div class="px-8 mb-12">
+<h1 class="text-headline-md font-headline-md text-primary-fixed">LinguoFlow</h1>
+</div>
+<nav class="flex-1 space-y-2">
+<div class="sidebar-active-pill py-3 flex items-center gap-3 font-bold shadow-md">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-body-md">Dashboard</span>
+</div>
+<a class="flex items-center gap-3 px-8 py-3 hover:text-white transition-all hover:translate-x-2" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="text-body-md">Explore</span>
+</a>
+<a class="flex items-center gap-3 px-8 py-3 hover:text-white transition-all hover:translate-x-2" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="text-body-md">Dictionary</span>
+</a>
+<a class="flex items-center gap-3 px-8 py-3 hover:text-white transition-all hover:translate-x-2" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-body-md">Schedule</span>
+</a>
+<div class="pt-8 mt-8 border-t border-white/10">
+<a class="flex items-center gap-3 px-8 py-3 hover:text-white transition-all hover:translate-x-2" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-8 py-3 hover:text-white transition-all hover:translate-x-2" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-body-md">Log Out</span>
+</a>
+</div>
+</nav>
+<div class="px-6 mt-auto">
+<div class="bg-primary-container p-5 rounded-lg relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 opacity-20 transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-6xl text-white">rocket_launch</span>
+</div>
+<p class="text-label-bold text-on-primary-container mb-1">Upgrade to PRO</p>
+<p class="text-label-sm text-white/80 mb-4">Unlock premium features for free.</p>
+<button class="bg-white text-primary text-label-bold py-2 px-4 rounded-full w-full hover:scale-105 active:scale-95 transition-all">TRY NOW</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden mesh-bg relative">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-gutter py-unit w-full bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm z-20">
+<div class="flex items-center gap-4">
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary text-headline-md">menu</span>
+</div>
+<div class="relative flex items-center md:hidden">
+<h2 class="text-headline-lg font-headline-lg font-extrabold text-primary">LinguoFlow</h2>
+</div>
+<div class="hidden md:flex items-center gap-2 bg-surface-container/50 border border-outline-variant/30 px-4 py-2 rounded-full focus-within:ring-2 ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64 placeholder:text-outline" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-high/50 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/50 shadow-sm cursor-pointer hover:scale-110 transition-transform">
+<img class="w-full h-full object-cover" data-alt="A friendly 3D character portrait of a stylish young woman named Annie with glasses and a wink, wearing a pink hoodie, rendered in a high-gloss Pixar-style aesthetic with soft professional lighting on a vibrant lavender background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmcLpKbef7qh7H0S83eNWk8b08VwinmgBvD5quDdhMyDHyQzXeeyS6uHuDPXDcyHWz0dKPepcAa1CYQpCjANQAgCKgxAI2gKDqjJJ3euUs6xqgpB4gT0pwReXfFOkK9Xb15s24TcDOxCJ-SmtfxFwnRPHwTXtjTp3C1OIrntuc34h2NQbdVtUnsqWo7CMwmYRk7RK4J1TXNGvIYVaf3yyt52J7VO2QzjWMUctXPplKBHunvdVKvw46Hfn79HSwfwGpcmcr3yodwS0_"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Area -->
+<div class="flex-1 overflow-y-auto p-gutter pb-32">
+<!-- Welcome Header Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-card-gap mb-12">
+<div class="lg:col-span-8 flex flex-col justify-center">
+<h2 class="text-display font-display text-on-surface mb-2">Hello, Annie! 👋</h2>
+<p class="text-body-lg text-on-surface-variant max-w-lg">Ready to continue your journey? You've already mastered 24 lessons this month. Keep it up!</p>
+</div>
+<div class="lg:col-span-4 glass-panel p-6 rounded-lg flex items-center justify-between ambient-glow-primary">
+<div class="flex flex-col gap-1">
+<span class="text-headline-lg font-headline-lg text-primary">24</span>
+<span class="text-label-bold text-outline uppercase">Lessons Done</span>
+</div>
+<div class="h-12 w-px bg-outline-variant/30 mx-4"></div>
+<div class="flex flex-col gap-1">
+<span class="text-headline-lg font-headline-lg text-secondary">1</span>
+<span class="text-label-bold text-outline uppercase">New Term</span>
+</div>
+<div class="ml-4 bg-primary-container/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary text-headline-md" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-card-gap items-start">
+<!-- Main Content Left: Word Sets & Statistics -->
+<div class="lg:col-span-8 space-y-12">
+<!-- Word Sets Section -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-md font-headline-md">Word Sets</h3>
+<div class="flex gap-2">
+<button class="p-2 bg-white rounded-full hover:bg-primary-fixed-dim transition-colors shadow-sm"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 bg-white rounded-full hover:bg-primary-fixed-dim transition-colors shadow-sm"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-card-gap">
+<!-- Card 1 -->
+<div class="group cursor-pointer">
+<div class="h-48 rounded-lg overflow-hidden relative mb-3 ambient-glow-primary transition-transform group-hover:-translate-y-2">
+<div class="absolute inset-0 bg-gradient-to-br from-[#775ceb] to-[#ffb0cf] opacity-80"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-white drop-shadow-lg">menu_book</span>
+</div>
+<button class="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-1.5 rounded-full text-white hover:bg-white/40">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<p class="font-bold text-body-lg text-center">Books and Library</p>
+</div>
+<!-- Card 2 -->
+<div class="group cursor-pointer">
+<div class="h-48 rounded-lg overflow-hidden relative mb-3 ambient-glow-secondary transition-transform group-hover:-translate-y-2">
+<div class="absolute inset-0 bg-gradient-to-br from-[#ff7db8] to-[#cabeff] opacity-80"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-white drop-shadow-lg">public</span>
+</div>
+<button class="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-1.5 rounded-full text-white hover:bg-white/40">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<p class="font-bold text-body-lg text-center">Countries and cities</p>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="h-48 rounded-lg overflow-hidden relative mb-3 ambient-glow-primary transition-transform group-hover:-translate-y-2">
+<div class="absolute inset-0 bg-gradient-to-br from-[#007f9d] to-[#ffb0cf] opacity-80"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-white drop-shadow-lg">schedule</span>
+</div>
+<button class="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-1.5 rounded-full text-white hover:bg-white/40">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<p class="font-bold text-body-lg text-center">What is o'clock now?</p>
+</div>
+</div>
+</section>
+<!-- Statistics Card -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-md font-headline-md">Statistics</h3>
+<div class="bg-white/50 px-4 py-2 rounded-full text-label-bold flex items-center gap-2 border border-white">
+<span>2022</span>
+<span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+</div>
+</div>
+<div class="glass-panel p-8 rounded-lg relative overflow-hidden">
+<!-- Simulated Chart -->
+<div class="h-48 w-full flex items-end justify-between relative">
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-10">
+<div class="h-px w-full bg-on-surface"></div>
+<div class="h-px w-full bg-on-surface"></div>
+<div class="h-px w-full bg-on-surface"></div>
+<div class="h-px w-full bg-on-surface"></div>
+</div>
+<!-- Data visual: Smooth svg path -->
+<svg class="absolute bottom-0 left-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 Q10,70 20,75 T40,60 T60,65 T80,40 T100,50" fill="none" stroke="#5e41d0" stroke-width="2"></path>
+<path d="M0,60 Q15,65 30,55 T60,70 T90,30 T100,40" fill="none" stroke="#a3336c" stroke-width="2"></path>
+<!-- Tooltip marker -->
+<circle cx="80" cy="40" fill="#5e41d0" r="4"></circle>
+</svg>
+<div class="absolute top-0 right-[15%] flex flex-col items-center group">
+<div class="bg-inverse-surface text-white p-2 rounded-lg text-label-sm shadow-xl mb-2 -translate-y-4 transition-transform group-hover:-translate-y-6">
+                                        4.5 Points
+                                    </div>
+<div class="w-px h-24 bg-primary/30"></div>
+</div>
+</div>
+<div class="flex justify-between mt-6 text-label-sm text-outline px-2">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Sidebar: Quick Start & Profile Info -->
+<div class="lg:col-span-4 space-y-card-gap">
+<!-- Quick Start Cards -->
+<div class="space-y-4">
+<h3 class="text-headline-md font-headline-md">Quick Start</h3>
+<!-- Exam Card -->
+<div class="bg-white/80 p-4 rounded-lg flex items-center justify-between group hover:bg-white transition-all cursor-pointer border border-white/50 shadow-sm hover:shadow-md">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center text-primary transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<p class="font-bold text-body-lg">Exam</p>
+<p class="text-label-sm text-outline">20 min • Full Test</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+</button>
+</div>
+<!-- Writing Card -->
+<div class="bg-white/80 p-4 rounded-lg flex items-center justify-between group hover:bg-white transition-all cursor-pointer border border-white/50 shadow-sm hover:shadow-md">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<div>
+<p class="font-bold text-body-lg">Writing</p>
+<p class="text-label-sm text-outline">15 min • Essay</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+</button>
+</div>
+<!-- Grammar Card -->
+<div class="bg-white/80 p-4 rounded-lg flex items-center justify-between group hover:bg-white transition-all cursor-pointer border border-white/50 shadow-sm hover:shadow-md">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">spellcheck</span>
+</div>
+<div>
+<p class="font-bold text-body-lg">Grammar</p>
+<p class="text-label-sm text-outline">17 min • Verbs</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-tertiary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Progress Milestone -->
+<div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
+<div class="absolute -top-10 -left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+<h4 class="text-label-bold uppercase text-outline mb-4">Current Streak</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-primary/10" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="176" stroke-dashoffset="44" stroke-width="6"></circle>
+</svg>
+<span class="absolute text-headline-md font-bold">12</span>
+</div>
+<div>
+<p class="font-bold text-body-lg">Day Streak!</p>
+<p class="text-label-sm text-outline">You're in the top 5%</p>
+</div>
+</div>
+<div class="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+<div class="flex justify-between mt-2 text-label-sm">
+<span class="text-primary font-bold">750 / 1000 XP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mobile Bottom Nav Bar (Responsive Filter) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-lg bg-inverse-surface/90 backdrop-blur-2xl flex justify-around items-center h-20 px-4 pb-safe shadow-[0_-10px_20px_rgba(0,0,0,0.1)]">
+<button class="flex flex-col items-center justify-center bg-surface text-primary rounded-xl px-4 py-2 mt-[-8px] shadow-lg scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline-variant/60 px-4 py-2 hover:text-primary-fixed-dim transition-all">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-label-sm font-label-sm">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline-variant/60 px-4 py-2 hover:text-primary-fixed-dim transition-all">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-label-sm font-label-sm">Dictionary</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline-variant/60 px-4 py-2 hover:text-primary-fixed-dim transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</button>
+</nav>
+<!-- Floating Decorative Elements -->
+<div class="fixed top-20 right-10 w-24 h-24 bg-primary-fixed-dim rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse pointer-events-none"></div>
+<div class="fixed bottom-40 left-10 w-32 h-32 bg-secondary-fixed-dim rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse pointer-events-none" style="animation-delay: 1s;"></div>
+</main>
+<script>
+        // Micro-interactions for glass cards
+        document.querySelectorAll('.glass-panel').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

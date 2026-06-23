@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__stitch__list_screens",
+      "Bash(curl -sL \"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sX2I1OGJhNTMxMDAwODQzYmM4Y2JlYjczY2QyNzJhNDY2EgsSBxCeubrs2hMYAZIBJAoKcHJvamVjdF9pZBIWQhQxMzMwNTMxMjAzMDEwOTQ4OTAyNA&filename=&opi=89354086\" -o \"e:\\\\Coding\\\\Manage_English\\\\design\\\\screens\\\\desktop\\\\dashboard.html\")",
+      "Bash(curl -sL \"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzU2ZDVmNjRhNDI3ZjRmMjRiMmY1NTNkYzBmNzQyYzRhEgsSBxCeubrs2hMYAZIBJAoKcHJvamVjdF9pZBIWQhQxMzMwNTMxMjAzMDEwOTQ4OTAyNA&filename=&opi=89354086\" -o \"e:\\\\Coding\\\\Manage_English\\\\design\\\\screens\\\\desktop\\\\word-sets.html\")",
+      "Bash(curl -sL \"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sX2E4NmUyZjBlNDUzNzRkNTM5NDI0ZmM3ZmNjZDZjZGViEgsSBxCeubrs2hMYAZIBJAoKcHJvamVjdF9pZBIWQhQxMzMwNTMxMjAzMDEwOTQ4OTAyNA&filename=&opi=89354086\" -o \"e:\\\\Coding\\\\Manage_English\\\\design\\\\screens\\\\desktop\\\\statistics.html\")",
+      "Bash(curl -sL \"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzhiMjE3ODgyMjM5MjQxNzE5OTI4N2I2YjNjMTExMjljEgsSBxCeubrs2hMYAZIBJAoKcHJvamVjdF9pZBIWQhQxMzMwNTMxMjAzMDEwOTQ4OTAyNA&filename=&opi=89354086\" -o \"e:\\\\Coding\\\\Manage_English\\\\design\\\\screens\\\\desktop\\\\profile.html\")",
+      "Bash(wait)"
+    ]
+  }
+}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LinguoFlow - Profile &amp; Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#cabeff",
+                        "outline": "#797586",
+                        "surface-container-high": "#e9e6f8",
+                        "secondary-fixed": "#ffd9e5",
+                        "tertiary": "#00647c",
+                        "surface-bright": "#fcf8ff",
+                        "surface": "#fcf8ff",
+                        "surface-container-low": "#f5f2ff",
+                        "on-secondary-container": "#780b4a",
+                        "on-surface": "#1a1a27",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f2efff",
+                        "secondary-container": "#ff7db8",
+                        "on-primary-fixed-variant": "#4825ba",
+                        "primary-fixed": "#e6deff",
+                        "inverse-surface": "#2f2f3c",
+                        "on-tertiary-container": "#fafdff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#004e61",
+                        "primary-container": "#775ceb",
+                        "tertiary-fixed": "#b7eaff",
+                        "on-secondary-fixed": "#3d0023",
+                        "on-surface-variant": "#484554",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#5bd5fc",
+                        "tertiary-container": "#007f9d",
+                        "secondary": "#a3336c",
+                        "background": "#fcf8ff",
+                        "secondary-fixed-dim": "#ffb0cf",
+                        "on-background": "#1a1a27",
+                        "primary": "#5e41d0",
+                        "on-tertiary-fixed": "#001f28",
+                        "surface-container": "#eeecfe",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#1c0062",
+                        "surface-tint": "#6043d3",
+                        "outline-variant": "#c9c4d7",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e3e0f2",
+                        "inverse-primary": "#cabeff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dad8e9",
+                        "surface-variant": "#e3e0f2",
+                        "on-secondary-fixed-variant": "#841853"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-padding": "32px",
+                        "unit": "8px",
+                        "card-gap": "20px",
+                        "sidebar-width": "260px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "display": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at 0% 0%, #fcf8ff 0%, #e6deff 50%, #ffd9e5 100%);
+            min-height: 100vh;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(94, 65, 208, 0.05);
+        }
+
+        .ambient-glow-primary {
+            box-shadow: 0 20px 40px -10px rgba(94, 65, 208, 0.2);
+        }
+
+        .ambient-glow-secondary {
+            box-shadow: 0 20px 40px -10px rgba(163, 51, 108, 0.2);
+        }
+
+        .mesh-gradient-bg {
+            background: linear-gradient(135deg, #775ceb 0%, #ff7db8 100%);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(94, 65, 208, 0.2);
+            border-radius: 10px;
+        }
+
+        .active-nav-bg {
+            background: #fcf8ff;
+            color: #1a1a27;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col md:flex-row overflow-hidden">
+<!-- Sidebar Desktop -->
+<aside class="hidden md:flex flex-col w-[sidebar-width] h-screen bg-inverse-surface py-8 shrink-0">
+<div class="px-8 mb-12">
+<h1 class="text-headline-md font-headline-md text-primary-fixed">LinguoFlow</h1>
+</div>
+<div class="flex-1 space-y-2">
+<nav class="flex flex-col">
+<a class="text-outline-variant/70 hover:text-white px-8 py-3 transition-all hover:translate-x-2" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</div>
+</a>
+<a class="text-outline-variant/70 hover:text-white px-8 py-3 transition-all hover:translate-x-2" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">search</span>
+<span class="text-body-md font-body-md">Explore</span>
+</div>
+</a>
+<a class="text-outline-variant/70 hover:text-white px-8 py-3 transition-all hover:translate-x-2" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">book</span>
+<span class="text-body-md font-body-md">Dictionary</span>
+</div>
+</a>
+<a class="text-outline-variant/70 hover:text-white px-8 py-3 transition-all hover:translate-x-2" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-body-md font-body-md">Schedule</span>
+</div>
+</a>
+<!-- Active Navigation -->
+<a class="bg-surface text-on-surface rounded-l-full ml-4 py-3 pl-6 font-bold shadow-md relative transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md font-body-md">Profile</span>
+</div>
+<div class="absolute right-0 top-[-20px] w-5 h-5 rounded-full shadow-[10px_10px_0_#fcf8ff]"></div>
+<div class="absolute right-0 bottom-[-20px] w-5 h-5 rounded-full shadow-[10px_-10px_0_#fcf8ff]"></div>
+</a>
+</nav>
+</div>
+<div class="px-8 mt-auto">
+<a class="flex items-center gap-3 text-outline-variant/70 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-body-md font-body-md">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Mobile Header -->
+<header class="md:hidden flex justify-between items-center px-gutter py-unit w-full bg-surface/70 backdrop-blur-xl border-b border-white/20 fixed top-0 z-50">
+<h1 class="text-headline-lg font-headline-lg font-extrabold text-primary">LinguoFlow</h1>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A cute, stylized 3D avatar of a young woman with brown hair and glasses, winking cheerfully. The character is rendered in a high-gloss, soft-3D Pixar-like aesthetic with warm skin tones and a playful expression, set against a vibrant purple circle background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBly6PfFtVSMeXNNviNBh_liP0g1iJ2OuBYbaZIEbGXRmYmrbdvFZF_eHLDV5BI8lCcGzzl9gzYoegAN0r7y-tEC7D9LHvccDAYFMR0XY2nzI2Xi40XaLeNJZ4i-M5Me8G5fjyeGUFyKJO3gvLWEgONrjW97XScjS68bPmfOcFEi667rh-zhXFt2e7BDxFpnF1C8iVwidJWUae--E6QIZuj5E7LHXJIjSJLsFWGVkR5Vh9e13-cZO_wCCiCQhE2yVvvLs7kLzSoYgN2"/>
+</div>
+<button class="material-symbols-outlined text-primary">notifications</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 h-screen overflow-y-auto custom-scrollbar pt-24 pb-32 md:pt-8 md:pb-8 px-gutter">
+<div class="max-w-6xl mx-auto space-y-10">
+<!-- User Header & Quick Progress -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-card-gap">
+<div class="lg:col-span-8 glass-card p-container-padding rounded-lg flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+<div class="relative">
+<div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-primary to-secondary">
+<div class="w-full h-full rounded-full border-4 border-white overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up profile portrait of Annie Leonchart, a stylish 3D character with a friendly expression. The lighting is soft and cinematic, highlighting the rounded features and glass-like smoothness of the character's skin. The background is a soft blue-to-pink gradient, matching the app's cheerful educational theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4W2Y0-q6JV2ojMwp5lhZhOeoQ2Aey3tkE3_L5mBEkg8-u_QYiFrzwuApShVmQPE3YMWewT05oYOxBzo4iSCACxWSaNJH6a_FVAg_-VRkeGC8N7Z7NQUd9U2398bYLnBdeZWNKbPNhvmlwzTV4_4ez3qbzMBOvFEv_kDU7lo7CeQJsJJ6smCZn2uO3OIGNR0EiedyZfyv9jyUfwanOJuXphq2-7oJGRfNB3XzLfWCpwQDHGOrr9crYLQrqR6Lev4eR291nqaNCO3hP"/>
+</div>
+</div>
+<div class="absolute bottom-1 right-1 w-8 h-8 bg-primary rounded-full border-4 border-white flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+<div class="text-center md:text-left">
+<h2 class="text-display font-display text-on-surface">Annie Leonchart</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">annie_leonchart@mail.com</p>
+<div class="mt-4 flex flex-wrap justify-center md:justify-start gap-4">
+<span class="bg-primary-container/20 text-primary px-4 py-1.5 rounded-full text-label-bold font-label-bold">Level 24</span>
+<span class="bg-secondary-container/20 text-secondary px-4 py-1.5 rounded-full text-label-bold font-label-bold">English Mastery</span>
+<span class="bg-tertiary-container/20 text-tertiary px-4 py-1.5 rounded-full text-label-bold font-label-bold">Daily Streak: 12</span>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+<span class="material-symbols-outlined text-[120px] translate-x-10 -translate-y-10">person</span>
+</div>
+</div>
+<div class="lg:col-span-4 glass-card p-container-padding rounded-lg flex flex-col justify-between ambient-glow-primary bg-primary text-white">
+<div class="space-y-1">
+<h3 class="text-headline-md font-headline-md">Daily Goals</h3>
+<p class="text-body-md font-body-md opacity-80">You're almost there! 85% done.</p>
+</div>
+<div class="my-6">
+<div class="flex justify-between text-label-bold font-label-bold mb-2">
+<span>Study Progress</span>
+<span>42/50 mins</span>
+</div>
+<div class="h-3 w-full bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-white rounded-full w-[85%] transition-all duration-1000"></div>
+</div>
+</div>
+<button class="w-full py-3 bg-white text-primary rounded-full text-label-bold font-label-bold hover:scale-[1.02] transition-transform active:scale-95">
+                        CONTINUE LEARNING
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-card-gap">
+<!-- PRO Upgrade Banner -->
+<div class="md:col-span-2 lg:col-span-2 glass-card rounded-lg p-container-padding mesh-gradient-bg text-white relative overflow-hidden flex flex-col justify-between group h-64">
+<div class="relative z-10">
+<h3 class="text-headline-lg font-headline-lg mb-2">Upgrade to PRO</h3>
+<p class="text-body-md font-body-md opacity-90 max-w-[200px]">Unlock premium features, offline learning, and no ads for free.</p>
+</div>
+<div class="relative z-10">
+<button class="px-8 py-3 bg-white text-secondary rounded-full text-label-bold font-label-bold shadow-lg hover:shadow-white/20 transition-all hover:-translate-y-1">
+                            TRY NOW
+                        </button>
+</div>
+<!-- 3D Rocket Element -->
+<div class="absolute -right-4 bottom-0 w-52 h-52 group-hover:translate-y-[-10px] group-hover:-translate-x-2 transition-transform duration-700 ease-out">
+<img class="w-full h-full object-contain" data-alt="A stylized 3D rocket ship taking off, rendered in a shiny, toy-like plastic material with bright purple and orange accents. The rocket is surrounded by soft, puffy 3D clouds and vibrant sparks. The lighting is cheerful and high-key, creating a sense of energy and progress, perfectly fitting the modern educational app aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE8mPKYz5wyXWQoR_L-MZSwGrcSrg5fl97sOWQp1_mR8oEtJ4Hloh4iekDG39L0_T3D-rGJpVfQ49IunkAwKugNtIkrYWrvopT9SUVH5ZGdY8ucjM0YjBZLja7tvi05tJDDhBFBdryMIlr0aoLGyr7LyVl_aGAw1rdZXrFWyVZgzWJutUMyT6Uop0mDVtgYCgrHuMib0PTgxVVV1TOdgc2WriZFVSKdVSRqPpb2GFzPhAZNUbyO4AGtWHg1aKpzu7WUEaqfPm1OYrp"/>
+</div>
+</div>
+<!-- Lessons Counter -->
+<div class="glass-card rounded-lg p-container-padding flex flex-col items-center justify-center text-center space-y-2 h-64">
+<div class="w-16 h-16 bg-primary-container/10 rounded-full flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-[32px]">school</span>
+</div>
+<span class="text-display font-display text-primary">24</span>
+<span class="text-label-bold font-label-bold text-outline uppercase tracking-widest">Lessons Completed</span>
+</div>
+<!-- Terms Counter -->
+<div class="glass-card rounded-lg p-container-padding flex flex-col items-center justify-center text-center space-y-2 h-64">
+<div class="w-16 h-16 bg-secondary-container/10 rounded-full flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-secondary text-[32px]">translate</span>
+</div>
+<span class="text-display font-display text-secondary">1.2k</span>
+<span class="text-label-bold font-label-bold text-outline uppercase tracking-widest">Words Learned</span>
+</div>
+</div>
+<!-- Learning Path Sections -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-card-gap">
+<div class="lg:col-span-8 space-y-6">
+<div class="flex justify-between items-center px-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">Continue Learning</h3>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Lesson Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-card-gap">
+<div class="glass-card rounded-lg p-unit flex gap-4 hover:shadow-xl transition-shadow group cursor-pointer">
+<div class="w-24 h-24 rounded-lg bg-primary/10 overflow-hidden relative shrink-0">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
+<img class="w-full h-full object-cover" data-alt="A 3D stylized representation of a stack of books and a library globe. The objects are rendered in soft pastel colors like lavender and mint green with a soft-focus background. The style is playful and tactile, resembling high-quality clay renders, creating an inviting educational vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCubX7wV4dq7UXtdaZnWXgtfKDLr0KCFiDTEMlvPOgE0PEmY27nf74KsTUjYfAG-YcRm6Mq1NDHKU56uosiIlAT3TMzKpGUjLUhP9xQWKHr2NWUWUnDRXa0ttPXS71ZwFcl9L4KJ_U9o4wNxcIjfgKGHz7POLH91bIG09cKHsSFMNscH3P7ReRXxIGFZqIT8K5_j_I0OQJxsDYq1w-qik1SOn9ZzxRChVcCI_2nzko7f8uZD7DbuWuySv23kTp3rl0NxaCO8CwKAkQ1"/>
+</div>
+<div class="flex flex-col justify-center py-2">
+<h4 class="text-body-lg font-body-lg text-on-surface mb-1">Books and Library</h4>
+<div class="flex items-center gap-2">
+<div class="w-20 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%]"></div>
+</div>
+<span class="text-label-sm font-label-sm text-outline">65%</span>
+</div>
+</div>
+<div class="ml-auto self-center p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">play_circle</span>
+</div>
+</div>
+<div class="glass-card rounded-lg p-unit flex gap-4 hover:shadow-xl transition-shadow group cursor-pointer">
+<div class="w-24 h-24 rounded-lg bg-secondary/10 overflow-hidden relative shrink-0">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/20 to-transparent"></div>
+<img class="w-full h-full object-cover" data-alt="A whimsical 3D illustration of a globe with small stylized buildings and trees popping out of it. The color palette features vibrant pinks, oranges, and deep blues. The lighting creates a soft ambient glow around the objects, suggesting a magical world of discovery and geography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5DqJBOZJVcPhzzy3LGEixewzfdjfjzOjhEwhBrlepSoDBYeSQSEXoh8WbT6Rl6CBAitNrR8TmHkT9OP4nnKsMBOKujdpZahPxXfFWVHHH_M_epOrq-F0GydmwXoNeski8pTfKrJCMXEcf84HUgJiyqpyl1aTC5fryCTtOsNgiE3TEApvRB6ZCURZ5j1UrbdZZMmCmO0LJrxMPlB5hu2rfS17LgNtAeAv32wDcd_i_YF3G8IZmTCoFaz0og2u6AzIGZZQyzbtz_LG9"/>
+</div>
+<div class="flex flex-col justify-center py-2">
+<h4 class="text-body-lg font-body-lg text-on-surface mb-1">Countries and Cities</h4>
+<div class="flex items-center gap-2">
+<div class="w-20 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[30%]"></div>
+</div>
+<span class="text-label-sm font-label-sm text-outline">30%</span>
+</div>
+</div>
+<div class="ml-auto self-center p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-secondary">play_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Settings & Preferences Side Panel -->
+<div class="lg:col-span-4 space-y-6">
+<h3 class="text-headline-md font-headline-md text-on-surface px-2">Account Settings</h3>
+<div class="glass-card rounded-lg overflow-hidden divide-y divide-outline-variant/10">
+<div class="p-4 flex items-center justify-between hover:bg-surface-container/30 cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">Personal Information</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-surface-container/30 cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">Notification Preferences</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-surface-container/30 cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">Security &amp; Privacy</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-surface-container/30 cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined">help</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">Help Center</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-lg bg-inverse-surface/90 backdrop-blur-2xl flex justify-around items-center h-20 px-4 pb-safe shadow-[0_-10px_20px_rgba(0,0,0,0.1)]">
+<a class="flex flex-col items-center justify-center text-outline-variant/60 px-4 py-2" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline-variant/60 px-4 py-2" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-label-sm font-label-sm mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline-variant/60 px-4 py-2" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-label-sm font-label-sm mt-1">Dictionary</span>
+</a>
+<!-- Active Tab -->
+<a class="flex flex-col items-center justify-center bg-surface text-primary rounded-xl px-4 py-2 mt-[-8px] shadow-lg scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-label-sm font-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<!-- Decorative Elements -->
+<div class="fixed top-20 left-10 w-64 h-64 -z-10 pointer-events-none opacity-20 hidden lg:block">
+<img class="w-full h-full object-contain animate-pulse" data-alt="A large, soft-focus 3D magnifying glass floating in space, rendered in a translucent glass material with a subtle purple-tinted handle. The lens distorts the background slightly, creating a beautiful refraction effect. The lighting is warm and ethereal, contributing to the app's immersive and tactile atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYLreVKFm3lP1_rBYqnYfDQ2dN4aBGwHaQPjxoXFgRwyLjlLWXOGvt__15RA0HqhHudC0b4tC0bx8SJz_6N-LeJaF9lAEVq47FgreWijg2yR-kd7dlCQN_ja3LjPxcD2Qp34vxE85dbkN1GDLbPmXbtQwVwjnkrG3sRgz0PqbWZDO_GfAPGqgfSQMj1zufDGXoxGVUEptxAaPp3WIuMtd3T_SShT8bt4IXM3Bm5JaDkrCLcuKfd09FL9uUal7pggBArydnCwHtH3sd"/>
+</div>
+<script>
+        // Simple micro-interaction for lesson cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('scale-[1.01]');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body></html>

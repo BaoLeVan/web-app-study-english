@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LinguoFlow - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(252, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        /* Ambient Glows */
+        .ambient-glow-purple {
+            box-shadow: 0 0 20px 0px rgba(94, 65, 208, 0.3);
+        }
+        .ambient-glow-pink {
+            box-shadow: 0 0 20px 0px rgba(255, 125, 184, 0.3);
+        }
+
+        /* Mesh Gradients */
+        .mesh-bg {
+            background-color: #fcf8ff;
+            background-image: 
+                radial-gradient(at 10% 20%, hsla(280,100%,90%,1) 0px, transparent 50%),
+                radial-gradient(at 80% 10%, hsla(200,100%,90%,1) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, hsla(330,100%,90%,1) 0px, transparent 50%),
+                radial-gradient(at 20% 90%, hsla(240,100%,90%,1) 0px, transparent 50%);
+        }
+
+        .mesh-card-1 {
+            background: linear-gradient(135deg, #a3defe 0%, #ffb0cf 100%);
+        }
+        .mesh-card-2 {
+            background: linear-gradient(135deg, #cabeff 0%, #ff7db8 100%);
+        }
+        .mesh-card-3 {
+            background: linear-gradient(135deg, #b7eaff 0%, #cabeff 100%);
+        }
+
+        /* Custom Chart Line */
+        .chart-line-1 {
+            stroke: #5e41d0;
+            stroke-width: 4;
+            fill: none;
+            stroke-linecap: round;
+        }
+        .chart-line-2 {
+            stroke: #5bd5fc;
+            stroke-width: 4;
+            fill: none;
+            stroke-linecap: round;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#a3336c",
+                      "inverse-on-surface": "#f2efff",
+                      "surface-container-highest": "#e3e0f2",
+                      "on-secondary-container": "#780b4a",
+                      "surface-bright": "#fcf8ff",
+                      "on-primary-container": "#fffbff",
+                      "on-background": "#1a1a27",
+                      "surface-variant": "#e3e0f2",
+                      "surface": "#fcf8ff",
+                      "outline-variant": "#c9c4d7",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#001f28",
+                      "on-surface": "#1a1a27",
+                      "inverse-surface": "#2f2f3c",
+                      "outline": "#797586",
+                      "on-primary-fixed-variant": "#4825ba",
+                      "inverse-primary": "#cabeff",
+                      "surface-container-high": "#e9e6f8",
+                      "on-surface-variant": "#484554",
+                      "on-error": "#ffffff",
+                      "primary-container": "#775ceb",
+                      "tertiary-fixed": "#b7eaff",
+                      "on-secondary-fixed-variant": "#841853",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#ff7db8",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#e6deff",
+                      "background": "#fcf8ff",
+                      "tertiary-container": "#007f9d",
+                      "surface-container-low": "#f5f2ff",
+                      "surface-dim": "#dad8e9",
+                      "on-tertiary-container": "#fafdff",
+                      "surface-container": "#eeecfe",
+                      "on-primary-fixed": "#1c0062",
+                      "tertiary": "#00647c",
+                      "surface-tint": "#6043d3",
+                      "primary-fixed-dim": "#cabeff",
+                      "on-tertiary-fixed-variant": "#004e61",
+                      "secondary-fixed": "#ffd9e5",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed-dim": "#5bd5fc",
+                      "secondary-fixed-dim": "#ffb0cf",
+                      "primary": "#5e41d0",
+                      "on-secondary-fixed": "#3d0023"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "sidebar-width": "260px",
+                      "container-padding": "32px",
+                      "gutter": "24px",
+                      "card-gap": "20px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-bold": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-bold": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+      </script>
+</head>
+<body class="mesh-bg text-on-surface font-body-md min-h-screen overflow-x-hidden">
+<!-- Top Navigation (Shared Component) -->
+<header class="h-20 w-[calc(100%-260px)] fixed right-0 top-0 z-40 bg-surface/70 dark:bg-surface-container/70 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-container-padding">
+<!-- Left Side: Search (Search Bar 'on_left') -->
+<div class="flex items-center gap-4 flex-1">
+<div class="flex gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="relative w-64 focus-within:ring-2 focus-within:ring-primary/50 transition-all rounded-full bg-white/50 backdrop-blur-md shadow-inner border border-white">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-transparent border-none rounded-full py-2 pl-10 pr-4 text-body-md focus:ring-0 placeholder:text-outline" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Right Side: Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full bg-white shadow-sm hover:bg-surface-container-low transition-colors text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full bg-white shadow-sm hover:bg-surface-container-low transition-colors text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-white shadow-sm ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A stylized 3D avatar of a young woman with glasses, smiling warmly. The avatar has a smooth, soft-clay texture typical of modern playful UI design. The lighting is bright and cheerful, set against a soft gradient background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDvZuPIFArznN3pcXFslxYeLHML9h4p1cQEyvDqtsjozXGOEASq_jM491AWTS5gkpzr3iDLeff5hQFp2KSsRAjYzcNlg3Xapz-cIRollyBS_b9tTFSwPXWJWnWtSkb2H9vZSIl0wBdxxyCkAXW7sbCYi_tpnNiOBl-ElaGV9g3G6vUvzjg-u5QvqDurGtRMV2Xg-6NHQi4_zeXxmvS6J2FHqEDYlnfMOC26YzyNoomn1BLWMoGOzLZMqPkk3--2AqEYCufqeJHAeWa"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation (Shared Component) -->
+<aside class="w-sidebar-width h-full fixed left-0 top-0 bg-inverse-surface dark:bg-inverse-surface shadow-xl flex flex-col py-8 z-50 rounded-r-[3rem] overflow-hidden">
+<!-- Brand Logo Area -->
+<div class="px-8 mb-12 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary-container flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">language</span>
+</div>
+<div>
+<h1 class="font-display text-[24px] text-primary-fixed leading-tight">LinguoFlow</h1>
+<p class="font-label-sm text-outline-variant">Master English</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-2">
+<!-- Active: Dashboard -->
+<a class="bg-surface text-on-surface rounded-l-full ml-4 py-3 pl-6 relative after:content-[''] after:absolute after:right-0 after:top-[-20px] after:h-[20px] after:w-[20px] after:rounded-br-full after:shadow-[10px_10px_0_10px_#fcf8ff] before:content-[''] before:absolute before:right-0 before:bottom-[-20px] before:h-[20px] before:w-[20px] before:rounded-tr-full before:shadow-[10px_-10px_0_10px_#fcf8ff] font-body-md flex items-center gap-4 transition-all duration-300 ease-in-out font-bold" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed ml-4 rounded-l-full font-body-md gap-4" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+                Word Sets
+            </a>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed ml-4 rounded-l-full font-body-md gap-4" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+                Progress
+            </a>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed ml-4 rounded-l-full font-body-md gap-4" href="#">
+<span class="material-symbols-outlined">group</span>
+                Community
+            </a>
+<a class="text-outline-variant hover:text-surface-bright flex items-center px-6 py-3 transition-colors hover:bg-primary/10 hover:text-primary-fixed ml-4 rounded-l-full font-body-md gap-4" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<!-- CTA Area -->
+<div class="px-6 mt-auto">
+<div class="bg-inverse-surface/50 border border-outline/20 rounded-2xl p-4 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full"></div>
+<h3 class="font-label-bold text-primary-fixed mb-1">Upgrade to Pro</h3>
+<p class="font-label-sm text-outline-variant mb-4">Unlock premium features for free.</p>
+<button class="w-full py-2 rounded-full bg-gradient-to-r from-primary to-secondary-container text-white font-label-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all">TRY NOW</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] pt-24 px-container-padding pb-12 min-h-screen">
+<div class="max-w-7xl mx-auto grid grid-cols-12 gap-gutter">
+<!-- Left Column: Word Sets & Stats -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-8">
+<!-- Word Sets Section -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-lg text-on-surface">Word Sets</h2>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-card-gap">
+<!-- Card 1 -->
+<div class="mesh-card-1 rounded-[24px] h-[180px] p-4 relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all hover:-translate-y-1">
+<button class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/50 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:scale-110 transition-transform duration-500">
+<img alt="Books" class="w-24 h-24 object-contain drop-shadow-xl" data-alt="A 3D rendered stack of colorful books, floating slightly. Soft, rounded edges with a playful, clay-like texture. Lighting is bright, casting soft shadows, fitting a vibrant educational interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUro6_40OFmmfLkP8d7WRzDFPiil2UvGAFS0ivufgq5NOajwSgVlt2WD7TW0wKKG9W70xTkHAlDFOkuu3iCL6aF1wnw4BYcGicC3VIg0T_U8AFjBlZlG-UnEPfCqcXPRQ0U0gImqwjyzNwiK44McBH9lytYpwHeJW_t5gLAwMCyz8Q2TOcrObDEstXYPYo8vfExbvmyMuaHpzrmwsXgUqXlr6SIV8fm73_hSsNBeIuhSWlLZPOb9tsXVxPEjb2hgt9S9sU4XrZCcYh"/>
+</div>
+<h3 class="absolute bottom-4 left-4 right-4 font-label-bold text-white text-[14px]">Books and Library</h3>
+</div>
+<!-- Card 2 -->
+<div class="mesh-card-2 rounded-[24px] h-[180px] p-4 relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all hover:-translate-y-1">
+<button class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/50 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:scale-110 transition-transform duration-500">
+<img alt="Globe" class="w-24 h-24 object-contain drop-shadow-xl" data-alt="A stylized 3D globe on a stand, rendered in soft pastel colors with a smooth, matte finish. It looks like a high-quality toy, sitting cleanly against a gradient background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuuIxZ8pNiKVUCi9LHdMVEj-BROtK9puare7JfhqJTDgGjg4Xn31gf2hhJawKAygI13E_-ZaKsDdMoTCuCWR97uZlOvdNErOToj3KJD_6cSTWBnx5BLdAWGu2ofhXae8JUZGonv4EyRfbKKoH0cxB2poehxDgybBhaSx_i0N7G4qe1y93eXatcTwG4aMiOAGA_vbtQwMB3IugiwHr2PlBKya4bxiO_cLWuKgf-dQ0ImsnQcYh9taLidrs0jqWj46ElEwHVdvRgO6Fb"/>
+</div>
+<h3 class="absolute bottom-4 left-4 right-4 font-label-bold text-white text-[14px]">Countries and cities</h3>
+</div>
+<!-- Card 3 -->
+<div class="mesh-card-3 rounded-[24px] h-[180px] p-4 relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all hover:-translate-y-1">
+<button class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/50 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<div class="absolute inset-0 flex items-center justify-center opacity-80 group-hover:scale-110 transition-transform duration-500">
+<img alt="Clock" class="w-24 h-24 object-contain drop-shadow-xl" data-alt="A cute, 3D rendered analog clock in pastel blue and purple tones. It has soft, rounded features and appears slightly bouncy, designed for a cheerful learning app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkpxQkjBLdl94-CaorSjA0UqmiUBrCaDgqFWUj2CG-ntIeWgVm5OGYVMEDdAVOxe-aHKKd9orzk37E-Gi5DWmXW6nNhC84sn7HeZxtl8ht20nQ84Lndp4PEtuPND41uztSGt4NgmgHRKh0cPGgm1IqlXrwq_Awqjcfe_XPwrv-Ky2vooabVayPbCIHpK-nuyn_uL8Mie-m2N4v7FjQ6kCi6zN8Xr0WmF3nmgAG66kzrKQ8dpHXsIOQOYXgh0fdV2V11hKdSDk0TZky"/>
+</div>
+<h3 class="absolute bottom-4 left-4 right-4 font-label-bold text-white text-[14px]">What is o'clock now?</h3>
+</div>
+</div>
+</section>
+<!-- Statistics Section -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-lg text-on-surface">Statistics</h2>
+<div class="flex items-center gap-4 bg-white rounded-full px-4 py-1.5 shadow-sm">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined text-[20px]">chevron_left</span></button>
+<span class="font-label-bold text-on-surface">2022</span>
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+</div>
+<div class="glass-card rounded-[2rem] p-6 h-[300px] relative flex flex-col">
+<!-- Chart Area (Simulated with SVG for smooth lines) -->
+<div class="flex-1 w-full relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 800 200">
+<!-- Grid Lines -->
+<line stroke="#f2efff" stroke-width="1" x1="0" x2="800" y1="50" y2="50"></line>
+<line stroke="#f2efff" stroke-width="1" x1="0" x2="800" y1="100" y2="100"></line>
+<line stroke="#f2efff" stroke-width="1" x1="0" x2="800" y1="150" y2="150"></line>
+<!-- Line 1 (Purple) -->
+<path class="chart-line-1" d="M 0 150 C 100 120, 150 180, 250 150 C 350 120, 400 180, 500 100 C 600 20, 650 120, 800 50"></path>
+<!-- Line 2 (Blue) -->
+<path class="chart-line-2" d="M 0 100 C 100 80, 200 120, 300 80 C 400 40, 500 140, 600 80 C 700 20, 750 100, 800 120"></path>
+<!-- Tooltip Point -->
+<circle cx="500" cy="100" fill="#1a1a27" r="6" stroke="#ffffff" stroke-width="3"></circle>
+</svg>
+<!-- Tooltip -->
+<div class="absolute left-[62.5%] top-[20%] -translate-x-1/2 -translate-y-full bg-inverse-surface text-white px-3 py-1.5 rounded-lg shadow-xl text-center z-10">
+<p class="font-label-bold text-[14px]">4.5</p>
+<p class="font-label-sm text-outline-variant text-[10px]">Points</p>
+<!-- Arrow -->
+<div class="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-inverse-surface rotate-45"></div>
+</div>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between px-2 mt-4 text-outline font-label-bold text-[11px] uppercase tracking-wider">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+<span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Profile Summary & Quick Start -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-8">
+<!-- Profile Summary Card -->
+<div class="glass-card rounded-[2rem] p-8 text-center relative mt-12">
+<!-- Avatar breaking out top -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full p-1 bg-gradient-to-br from-primary-fixed to-secondary-container shadow-xl">
+<div class="w-full h-full rounded-full overflow-hidden border-2 border-white bg-white">
+<img alt="Annie Leonchart" class="w-full h-full object-cover" data-alt="A stylized 3D avatar of a young woman with glasses, smiling warmly. The avatar has a smooth, soft-clay texture typical of modern playful UI design. The lighting is bright and cheerful, set against a soft gradient background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr0o4Y5NRvqG8gWLrhvJCsJOScZxyl_n_XDcWLRcga-onZO79eIOKfmxa7QJ4l10umVRsg1aCtWBNwv24ZIq_U_IOxO8D70WEsaXkg79GY0IyvdrFqEKAJrwG4q3Qej_iMzt2ILh-yQEqGE2SwousKdgPMcOaphblffcQuO7UTF4XvhJT5lrteqR4n5I-d1TQqt3UXXRknIuNrEuXr8R4nZFyu2McG4bfiJ9XtoS-Wwb0g57vb8FjAJI0WPmpDHvvADGdWrIPTh6_L"/>
+</div>
+</div>
+<div class="mt-10">
+<h2 class="font-headline-md text-on-surface mb-1">Annie Leonchart</h2>
+<p class="font-body-md text-outline mb-6">annie_leonchart@mail.com</p>
+<div class="flex justify-center gap-8 border-t border-surface-dim pt-6">
+<div>
+<p class="font-label-sm text-outline mb-1 uppercase tracking-wider">Lessons</p>
+<p class="font-display text-[28px] text-on-surface">24</p>
+</div>
+<div class="w-[1px] bg-surface-dim"></div>
+<div>
+<p class="font-label-sm text-outline mb-1 uppercase tracking-wider">Terms</p>
+<p class="font-display text-[28px] text-on-surface">1</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Start Section -->
+<section>
+<h2 class="font-headline-lg text-on-surface mb-6">Quick Start</h2>
+<div class="flex flex-col gap-4">
+<!-- Quick Start Item 1 -->
+<button class="glass-card rounded-[1.5rem] p-4 flex items-center gap-4 hover:ambient-glow-purple transition-shadow group text-left w-full">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-fixed to-secondary-fixed flex items-center justify-center p-2 shadow-inner">
+<img alt="Exam" class="w-full h-full object-contain" data-alt="A small 3D icon of a graduation cap sitting on a diploma. Smooth pastel colors, soft lighting, matching a playful app aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnoKyNlWBzVdPxsIWL0f6nv2raqEjW7cOQ-SVscZaAdRVWBKb9WlY-zoJkl0-7DJiNjO5K01AY6i5WfJzZqHvlHaVKQwVFv7hJIzKokEYrr3SxFEWI-2ibHkCZML1Y6f3IlofGB5h9euli-dK7LfPKui1XcJ5Y7uO87Gok01Zf7PhTDAU2XMymGni9Z9yYP1JoGRN7WILjEIv1gfaeop9l9wxHRVLJaf3l12YLY5Y8OhMoeHn7l7uQmGBgZjIriV_eCOvuHFOVB1R7"/>
+</div>
+<div>
+<h4 class="font-label-bold text-on-surface text-[14px] group-hover:text-primary transition-colors">Exam</h4>
+<p class="font-label-sm text-outline">20 min</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">arrow_forward</span>
+</button>
+<!-- Quick Start Item 2 -->
+<button class="glass-card rounded-[1.5rem] p-4 flex items-center gap-4 hover:ambient-glow-purple transition-shadow group text-left w-full ml-4">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-fixed to-tertiary-fixed flex items-center justify-center p-2 shadow-inner">
+<img alt="Writing" class="w-full h-full object-contain" data-alt="A small 3D icon of a purple pencil writing on a piece of paper. Smooth pastel colors, soft lighting, bouncy feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD18-RFUufh7SXVfY3_wrwvTp44HQfZshYjZbR9eWpWOB-1CBniVsvXM3UO36ht6eGvfrUOZdONI-mZf_7v-mXPf-MILGLKLJwpsnKw4g7FwQpwILCIAg6LMpjt3SPHrc_YEZQuyE06cf_ckvUN9_XXqAa1ZoB0YLlbxiTI7uYQK6SgpPm6W--8xHkIkfw81TAJp2DyEs7MkdiU-fDSObmgPndtU_aQBqqUQI65BJZm4E88g-a7UgaCFRwUarXtrhV2mLPFKvtRUhgm"/>
+</div>
+<div>
+<h4 class="font-label-bold text-on-surface text-[14px] group-hover:text-primary transition-colors">Writing</h4>
+<p class="font-label-sm text-outline">15 min</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">arrow_forward</span>
+</button>
+<!-- Quick Start Item 3 -->
+<button class="glass-card rounded-[1.5rem] p-4 flex items-center gap-4 hover:ambient-glow-purple transition-shadow group text-left w-full ml-8 bg-white/90">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-tertiary-fixed to-secondary-fixed flex items-center justify-center p-2 shadow-inner">
+<img alt="Grammar" class="w-full h-full object-contain" data-alt="A small 3D icon of an open folder with documents. Bright pastel colors, smooth clay-like texture, cheerful look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFwj8XCg2FCC4QtQaaeVmZgnmBfLZJzsIizPsFAXa6vNNzKWn-o_xrytmE6yjE85Q-gSkiEfxMurmkjgHcn4vdrdORVhkSGV5naHun-1k0aVC6uXaiVAVkXhQkeo-9FByXBnr9aOtVJ2CWi5KNfwa8-ad06J0Hk1YBpPzsiYbm_uBH6WOyaaFeQr8meCxUjNAu8JWm2HxxbTfTKp0snrH5u-yB9J8NW0nXkxw2C7YiPvpPXHEGw8CUhDIIG_GfcEZspB85u4_UMW5c"/>
+</div>
+<div>
+<h4 class="font-label-bold text-on-surface text-[14px] group-hover:text-primary transition-colors">Grammar</h4>
+<p class="font-label-sm text-outline">17 min</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">arrow_forward</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>
