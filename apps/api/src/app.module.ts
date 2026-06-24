@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { SrsModule } from './modules/srs/srs.module';
+import { VocabularyModule } from './modules/vocabulary/vocabulary.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
@@ -15,6 +16,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     AuthModule,
     UsersModule,
     SrsModule,
+    VocabularyModule,
     NotificationsModule,
   ],
 })
