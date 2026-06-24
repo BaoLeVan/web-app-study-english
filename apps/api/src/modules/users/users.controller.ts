@@ -1,7 +1,12 @@
-import { Body, Controller, Get, Patch, Req, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Req, UseGuards, UsePipes } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ZodValidationPipe } from 'nestjs-zod';
-import { UpdateSettingsSchema, type UpdateSettingsDto } from '@repo/types';
+import {
+  PushSubscriptionSchema,
+  UpdateSettingsSchema,
+  type PushSubscriptionDto,
+  type UpdateSettingsDto,
+} from '@repo/types';
 import { UsersService } from './users.service';
 
 interface AuthedRequest {
@@ -22,5 +27,16 @@ export class UsersController {
   @UsePipes(new ZodValidationPipe(UpdateSettingsSchema))
   updateSettings(@Req() req: AuthedRequest, @Body() dto: UpdateSettingsDto) {
     return this.users.updateSettings(req.user.userId, dto);
+  }
+
+  @Post('me/push')
+  @UsePipes(new ZodValidationPipe(PushSubscriptionSchema))
+  subscribePush(@Req() req: AuthedRequest, @Body() dto: PushSubscriptionDto) {
+    return this.users.savePushSubscription(req.user.userId, dto);
+  }
+
+  @Delete('me/push')
+  unsubscribePush(@Req() req: AuthedRequest) {
+    return this.users.clearPushSubscription(req.user.userId);
   }
 }
