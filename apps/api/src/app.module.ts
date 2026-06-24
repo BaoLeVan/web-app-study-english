@@ -10,6 +10,7 @@ import { VocabularyModule } from './modules/vocabulary/vocabulary.module';
 import { ContentModule } from './modules/content/content.module';
 import { DictionaryModule } from './modules/dictionary/dictionary.module';
 import { SpeechModule } from './modules/speech/speech.module';
+import { DictationModule } from './modules/dictation/dictation.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
@@ -25,6 +26,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     ContentModule,
     DictionaryModule,
     SpeechModule,
+    DictationModule,
     NotificationsModule,
   ],
 })
