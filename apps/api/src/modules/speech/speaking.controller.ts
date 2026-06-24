@@ -1,19 +1,13 @@
-import {
-  BadRequestException,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Req,
-  UploadedFile,
-  UseGuards,
-  UseInterceptors,
-} from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Get, Param, Post, Req, UseGuards, UsePipes } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import type { Express } from 'express';
+import { ZodValidationPipe } from 'nestjs-zod';
+import { z } from 'zod';
 import { SpeakingService } from './speaking.service';
-import { SpeechService } from './speech.service';
+
+const AssessSchema = z.object({
+  transcript: z.string().min(1).max(2000),
+  durationMs: z.number().int().nonnegative().max(120_000),
+});
 
 interface AuthedRequest {
   user: { userId: string };
@@ -22,15 +16,7 @@ interface AuthedRequest {
 @Controller('speaking')
 @UseGuards(AuthGuard('jwt'))
 export class SpeakingController {
-  constructor(
-    private readonly speaking: SpeakingService,
-    private readonly speech: SpeechService,
-  ) {}
-
-  @Get('status')
-  status() {
-    return { azureConfigured: this.speech.isConfigured() };
-  }
+  constructor(private readonly speaking: SpeakingService) {}
 
   @Get('attempts')
   recent(@Req() req: AuthedRequest) {
@@ -38,15 +24,12 @@ export class SpeakingController {
   }
 
   @Post('cues/:cueId/assess')
-  @UseInterceptors(
-    FileInterceptor('audio', { limits: { fileSize: 5 * 1024 * 1024 } }),
-  )
-  async assess(
+  @UsePipes(new ZodValidationPipe(AssessSchema))
+  assess(
     @Req() req: AuthedRequest,
     @Param('cueId') cueId: string,
-    @UploadedFile() file: Express.Multer.File,
+    @Body() dto: z.infer<typeof AssessSchema>,
   ) {
-    if (!file) throw new BadRequestException('Missing audio file');
-    return this.speaking.assessAndStore(req.user.userId, cueId, file.buffer);
+    return this.speaking.assessAndStore(req.user.userId, cueId, dto);
   }
 }

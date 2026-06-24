@@ -5,16 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Button, GlassCard, Icon } from '@/components/ui';
 import { useAuth } from '@/stores/auth';
 import { contentApi, type ContentSummary } from '@/lib/content-api';
-import { speakingApi } from '@/lib/speaking-api';
 
 export default function SpeakingPage() {
   const token = useAuth((s) => s.accessToken);
-
-  const status = useQuery({
-    queryKey: ['speaking-status'],
-    queryFn: () => speakingApi.status(token!),
-    enabled: !!token,
-  });
 
   const list = useQuery({
     queryKey: ['contents'],
@@ -40,16 +33,6 @@ export default function SpeakingPage() {
           </Button>
         </Link>
       </div>
-
-      {status.data && !status.data.azureConfigured && (
-        <GlassCard className="flex items-center gap-3 rounded-lg p-4 border border-secondary/30 bg-secondary-fixed/30">
-          <Icon name="info" className="text-secondary" />
-          <p className="font-body-md text-on-surface">
-            Azure Speech key not configured — you can still shadow, but scoring is disabled until
-            an admin sets <code>AZURE_SPEECH_KEY</code> / <code>AZURE_SPEECH_REGION</code>.
-          </p>
-        </GlassCard>
-      )}
 
       {list.isLoading ? (
         <p className="font-body-md text-outline">Loading…</p>

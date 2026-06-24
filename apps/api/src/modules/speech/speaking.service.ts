@@ -1,15 +1,16 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { SpeechService } from './speech.service';
+import { scoreSpeech } from './speech.scorer';
+
+interface AssessDto {
+  transcript: string;
+  durationMs: number;
+}
 
 @Injectable()
 export class SpeakingService {
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly speech: SpeechService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  /** List recent speaking attempts for a user (most recent first). */
   recent(userId: string, limit = 20) {
     return this.prisma.speakingAttempt.findMany({
       where: { userId },
@@ -20,16 +21,22 @@ export class SpeakingService {
   }
 
   /**
-   * Score a recording against the cue's reference text, persist the result.
-   * We deliberately do NOT store the audio bytes in the DB — only the score.
-   * (Object-storage upload comes in a later sprint; for v1 keep DB lean.)
+   * Compare a browser-produced transcript against the cue text, persist the
+   * scored attempt. No audio bytes are stored — everything lives in WordScore
+   * JSONB plus the four headline numbers.
    */
-  async assessAndStore(userId: string, cueId: string, audio: Buffer) {
+  async assessAndStore(userId: string, cueId: string, dto: AssessDto) {
     const cue = await this.prisma.subtitleCue.findUnique({ where: { id: cueId } });
     if (!cue) throw new NotFoundException('Cue not found');
-    if (audio.byteLength === 0) throw new BadRequestException('Empty audio');
+    if (!dto.transcript || dto.transcript.trim().length === 0) {
+      throw new BadRequestException('Empty transcript');
+    }
 
-    const assessment = await this.speech.assess(audio, cue.text);
+    const assessment = scoreSpeech({
+      referenceText: cue.text,
+      transcript: dto.transcript,
+      durationMs: dto.durationMs,
+    });
 
     const attempt = await this.prisma.speakingAttempt.create({
       data: {

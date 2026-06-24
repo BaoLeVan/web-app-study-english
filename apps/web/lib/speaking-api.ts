@@ -1,6 +1,5 @@
+import { api } from './api';
 import type { SpeechAssessment } from '@repo/types';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api';
 
 export interface SpeakingAttemptRow {
   id: string;
@@ -19,33 +18,20 @@ interface AssessResponse {
 }
 
 export const speakingApi = {
-  status: (token: string) =>
-    fetch(`${API_URL}/speaking/status`, {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((r) => r.json() as Promise<{ azureConfigured: boolean }>),
-
-  recent: (token: string) =>
-    fetch(`${API_URL}/speaking/attempts`, {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((r) => r.json() as Promise<SpeakingAttemptRow[]>),
-
-  /** Upload a WAV blob recorded with useRecorder() to score it. */
-  assess: async (
+  recent: (token: string) => api<SpeakingAttemptRow[]>('/speaking/attempts', { token }),
+  /**
+   * Score a Web Speech API transcript against a cue's reference text. No
+   * audio is sent — the transcript is captured client-side and the duration
+   * is measured client-side too, so this is a tiny JSON POST.
+   */
+  assess: (
     token: string,
     cueId: string,
-    audio: Blob,
-  ): Promise<AssessResponse> => {
-    const fd = new FormData();
-    fd.append('audio', audio, 'recording.wav');
-    const res = await fetch(`${API_URL}/speaking/cues/${cueId}/assess`, {
+    payload: { transcript: string; durationMs: number },
+  ) =>
+    api<AssessResponse>(`/speaking/cues/${cueId}/assess`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}` },
-      body: fd,
-    });
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(text || res.statusText);
-    }
-    return res.json() as Promise<AssessResponse>;
-  },
+      body: payload,
+      token,
+    }),
 };

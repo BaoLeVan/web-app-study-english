@@ -9,7 +9,7 @@ import { cn } from '@/lib/cn';
 import { useAuth } from '@/stores/auth';
 import { contentApi, type SubtitleCueRow } from '@/lib/content-api';
 import { speakingApi } from '@/lib/speaking-api';
-import { useRecorder } from '@/lib/useRecorder';
+import { useSpeechRecognition } from '@/lib/useSpeechRecognition';
 import { usePlayerStore } from '@/stores/player';
 import { VideoPlayer } from '@/components/video/VideoPlayer';
 import { InteractiveSubtitle } from '@/components/video/InteractiveSubtitle';
@@ -27,11 +27,6 @@ export default function SpeakingDetailPage({ params }: PageProps) {
   const content = useQuery({
     queryKey: ['content', id],
     queryFn: () => contentApi.get(token!, id),
-    enabled: !!token,
-  });
-  const status = useQuery({
-    queryKey: ['speaking-status'],
-    queryFn: () => speakingApi.status(token!),
     enabled: !!token,
   });
 
@@ -60,11 +55,7 @@ export default function SpeakingDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      <SpeakingWorkspace
-        videoSrc={videoSrc}
-        cues={cues}
-        azureConfigured={status.data?.azureConfigured ?? false}
-      />
+      <SpeakingWorkspace videoSrc={videoSrc} cues={cues} />
     </div>
   );
 }
@@ -72,26 +63,33 @@ export default function SpeakingDetailPage({ params }: PageProps) {
 function SpeakingWorkspace({
   videoSrc,
   cues,
-  azureConfigured,
 }: {
   videoSrc: string;
   cues: SubtitleCueRow[];
-  azureConfigured: boolean;
 }) {
   const token = useAuth((s) => s.accessToken)!;
   const activeIdx = usePlayerStore((s) => s.activeCueIndex);
   const [shadowing, setShadowing] = useState(true);
   const [assessment, setAssessment] = useState<{
     cueText: string;
+    transcript: string;
     result: SpeechAssessment;
   } | null>(null);
 
-  const recorder = useRecorder();
+  const recog = useSpeechRecognition();
 
   const assess = useMutation({
-    mutationFn: async (params: { cueId: string; cueText: string; audio: Blob }) => {
-      const res = await speakingApi.assess(token, params.cueId, params.audio);
-      return { cueText: params.cueText, result: res.assessment };
+    mutationFn: async (params: {
+      cueId: string;
+      cueText: string;
+      transcript: string;
+      durationMs: number;
+    }) => {
+      const res = await speakingApi.assess(token, params.cueId, {
+        transcript: params.transcript,
+        durationMs: params.durationMs,
+      });
+      return { cueText: params.cueText, transcript: params.transcript, result: res.assessment };
     },
     onSuccess: (data) => setAssessment(data),
   });
@@ -99,13 +97,22 @@ function SpeakingWorkspace({
   const activeCue = activeIdx >= 0 ? cues[activeIdx] : null;
 
   const handleRecord = async () => {
-    if (recorder.isRecording) {
-      const blob = await recorder.stop();
-      if (!blob || !activeCue) return;
-      assess.mutate({ cueId: activeCue.id, cueText: activeCue.text, audio: blob });
+    if (recog.isRecording) {
+      const captured = await recog.stop();
+      if (!captured || !activeCue) return;
+      if (!captured.transcript) {
+        // Nothing was recognized — surface that without firing a network call.
+        return;
+      }
+      assess.mutate({
+        cueId: activeCue.id,
+        cueText: activeCue.text,
+        transcript: captured.transcript,
+        durationMs: captured.durationMs,
+      });
     } else {
       setAssessment(null);
-      await recorder.start();
+      recog.start();
     }
   };
 
@@ -122,14 +129,10 @@ function SpeakingWorkspace({
           </GlassCard>
         )}
 
-        <ShadowingControls
-          cues={cues}
-          enabled={shadowing}
-          onToggle={setShadowing}
-        />
+        <ShadowingControls cues={cues} enabled={shadowing} onToggle={setShadowing} />
 
-        {/* Recorder panel */}
-        <GlassCard className="rounded-lg p-6" glow={recorder.isRecording ? 'secondary' : undefined}>
+        {/* Recognition panel */}
+        <GlassCard className="rounded-lg p-6" glow={recog.isRecording ? 'secondary' : undefined}>
           <div className="mb-4 flex items-start justify-between gap-4">
             <div className="flex-1">
               <p className="font-label-bold uppercase tracking-wider text-outline">
@@ -138,45 +141,51 @@ function SpeakingWorkspace({
               <p className="font-headline-md text-on-surface">
                 {activeCue?.text ?? 'Press play to start.'}
               </p>
+              {recog.isRecording && recog.interim && (
+                <p className="mt-2 font-body-md italic text-outline-variant">
+                  …{recog.interim}
+                </p>
+              )}
             </div>
             <button
               onClick={handleRecord}
-              disabled={!activeCue || !recorder.isSupported || assess.isPending}
+              disabled={!activeCue || !recog.isSupported || assess.isPending}
               className={cn(
                 'flex h-16 w-16 items-center justify-center rounded-full text-white shadow-lg transition-all',
-                recorder.isRecording
+                recog.isRecording
                   ? 'bg-error animate-pulse'
                   : 'bg-gradient-to-br from-primary to-secondary-container hover:-translate-y-0.5',
                 'disabled:opacity-40',
               )}
-              aria-label={recorder.isRecording ? 'Stop recording' : 'Start recording'}
+              aria-label={recog.isRecording ? 'Stop recording' : 'Start recording'}
             >
-              <Icon name={recorder.isRecording ? 'stop' : 'mic'} filled />
+              <Icon name={recog.isRecording ? 'stop' : 'mic'} filled />
             </button>
           </div>
-          {!recorder.isSupported && (
-            <p className="font-label-sm text-error">Microphone not supported in this browser.</p>
-          )}
-          {recorder.error && (
-            <p className="font-label-sm text-error">{recorder.error}</p>
-          )}
-          {!azureConfigured && (
-            <p className="font-label-sm text-outline-variant">
-              Scoring is disabled — recording will still work for self-practice.
+          {!recog.isSupported && (
+            <p className="font-label-sm text-error">
+              Speech recognition isn't available in this browser. Try Chrome, Edge, or Safari.
             </p>
           )}
+          {recog.error && <p className="font-label-sm text-error">{recog.error}</p>}
           {assess.isPending && (
-            <p className="mt-2 font-label-sm text-primary">Scoring with Azure…</p>
+            <p className="mt-2 font-label-sm text-primary">Scoring…</p>
           )}
           {assess.isError && (
-            <p className="mt-2 font-label-sm text-error">
-              {(assess.error as Error).message}
-            </p>
+            <p className="mt-2 font-label-sm text-error">{(assess.error as Error).message}</p>
           )}
         </GlassCard>
 
         {assessment && (
-          <ScoreCard assessment={assessment.result} referenceText={assessment.cueText} />
+          <>
+            <GlassCard className="rounded-lg p-4">
+              <p className="font-label-bold uppercase tracking-wider text-outline">
+                You said
+              </p>
+              <p className="font-body-lg text-on-surface">{assessment.transcript}</p>
+            </GlassCard>
+            <ScoreCard assessment={assessment.result} referenceText={assessment.cueText} />
+          </>
         )}
       </div>
 
