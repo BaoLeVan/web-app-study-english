@@ -4,21 +4,21 @@ services:
     container_name: linguoflow-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: linguoflow
-      POSTGRES_PASSWORD: linguoflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
       POSTGRES_DB: linguoflow
     ports:
       - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U linguoflow']
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
       timeout: 5s
       retries: 5
 
   redis:
-    image: redis:7-alpine
+    image: redis:latest
     container_name: linguoflow-redis
     restart: unless-stopped
     ports:
