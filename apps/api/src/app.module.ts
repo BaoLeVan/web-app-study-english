@@ -9,6 +9,7 @@ import { SrsModule } from './modules/srs/srs.module';
 import { VocabularyModule } from './modules/vocabulary/vocabulary.module';
 import { ContentModule } from './modules/content/content.module';
 import { DictionaryModule } from './modules/dictionary/dictionary.module';
+import { SpeechModule } from './modules/speech/speech.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
@@ -23,6 +24,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     VocabularyModule,
     ContentModule,
     DictionaryModule,
+    SpeechModule,
     NotificationsModule,
   ],
 })
