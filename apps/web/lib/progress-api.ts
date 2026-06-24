@@ -17,8 +17,19 @@ export interface ProgressSummary {
   }>;
 }
 
+export interface ProgressSeries {
+  days: Array<{
+    day: string;
+    reviews: number;
+    dictation: number;
+    speaking: number;
+  }>;
+}
+
 export const progressApi = {
   me: (token: string) => api<ProgressSummary>('/progress/me', { token }),
+  series: (token: string, days = 30) =>
+    api<ProgressSeries>(`/progress/series?days=${days}`, { token }),
 };
 
 export const notificationsApi = {

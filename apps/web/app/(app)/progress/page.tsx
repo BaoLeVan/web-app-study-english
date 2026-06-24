@@ -3,17 +3,23 @@
 import { useQuery } from '@tanstack/react-query';
 import { GlassCard, Icon, ProgressBar } from '@/components/ui';
 import { useAuth } from '@/stores/auth';
-import { progressApi, type ProgressSummary } from '@/lib/progress-api';
+import { progressApi, type ProgressSummary, type ProgressSeries } from '@/lib/progress-api';
+import { LineChart } from '@/components/charts/LineChart';
 
 export default function ProgressPage() {
   const token = useAuth((s) => s.accessToken);
-  const { data, isLoading } = useQuery({
+  const summaryQ = useQuery({
     queryKey: ['progress'],
     queryFn: () => progressApi.me(token!),
     enabled: !!token,
   });
+  const seriesQ = useQuery({
+    queryKey: ['progress-series'],
+    queryFn: () => progressApi.series(token!, 30),
+    enabled: !!token,
+  });
 
-  if (isLoading || !data) {
+  if (summaryQ.isLoading || !summaryQ.data) {
     return <p className="font-body-md text-outline">Loading…</p>;
   }
 
@@ -28,10 +34,54 @@ export default function ProgressPage() {
         </div>
       </div>
 
-      <SummaryCards data={data} />
-      <StreakCard data={data} />
-      <AchievementsRow data={data} />
+      <SummaryCards data={summaryQ.data} />
+      <StreakCard data={summaryQ.data} />
+      {seriesQ.data && <ActivityChartCard data={seriesQ.data} />}
+      <AchievementsRow data={summaryQ.data} />
     </div>
+  );
+}
+
+function ActivityChartCard({ data }: { data: ProgressSeries }) {
+  const reviews = data.days.map((d) => ({ label: d.day, value: d.reviews }));
+  const speakingDictation = data.days.map((d) => ({
+    label: d.day,
+    value: d.speaking + d.dictation,
+  }));
+
+  const totalReviews = data.days.reduce((s, d) => s + d.reviews, 0);
+  const totalPractice = data.days.reduce((s, d) => s + d.speaking + d.dictation, 0);
+
+  return (
+    <GlassCard className="rounded-lg p-6">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+        <h3 className="font-headline-md text-on-surface">Activity — last 30 days</h3>
+        <div className="flex gap-4 font-label-sm text-outline">
+          <span className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full" style={{ background: 'rgb(186, 104, 200)' }} />
+            Reviews ({totalReviews})
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full" style={{ background: 'rgb(94, 65, 208)' }} />
+            Practice ({totalPractice})
+          </span>
+        </div>
+      </div>
+      <div className="space-y-6">
+        <div>
+          <p className="mb-2 font-label-sm text-outline">Vocabulary reviews</p>
+          <div className="rounded-md bg-inverse-surface p-2">
+            <LineChart data={reviews} color="rgb(186, 104, 200)" height={180} />
+          </div>
+        </div>
+        <div>
+          <p className="mb-2 font-label-sm text-outline">Speaking + dictation attempts</p>
+          <div className="rounded-md bg-inverse-surface p-2">
+            <LineChart data={speakingDictation} color="rgb(94, 65, 208)" height={180} />
+          </div>
+        </div>
+      </div>
+    </GlassCard>
   );
 }
 

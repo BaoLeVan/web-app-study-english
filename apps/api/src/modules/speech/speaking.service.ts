@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ProgressService } from '../progress/progress.service';
 import { scoreSpeech } from './speech.scorer';
 
 interface AssessDto {
@@ -9,7 +10,10 @@ interface AssessDto {
 
 @Injectable()
 export class SpeakingService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly progress: ProgressService,
+  ) {}
 
   recent(userId: string, limit = 20) {
     return this.prisma.speakingAttempt.findMany({
@@ -49,6 +53,9 @@ export class SpeakingService {
         wordScores: assessment.words as unknown as object,
       },
     });
+
+    // Speaking unlocks first_speak — evaluate after the attempt is persisted.
+    await this.progress.evaluateAchievements(userId).catch(() => {});
 
     return { attempt, assessment };
   }
