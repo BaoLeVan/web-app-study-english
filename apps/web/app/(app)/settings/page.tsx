@@ -7,6 +7,7 @@ import { useAuth } from '@/stores/auth';
 import { useLogout } from '@/lib/session';
 import { usersApi, type UserProfile } from '@/lib/users-api';
 import { subscribeToPush, unsubscribeFromPush } from '@/lib/push';
+import { notificationsApi } from '@/lib/progress-api';
 
 export default function SettingsPage() {
   const token = useAuth((s) => s.accessToken);
@@ -246,6 +247,17 @@ function PreferencesGrid({
             <p className="font-body-md text-on-surface-variant">
               {pushOn ? 'On' : 'Off'}
             </p>
+            {pushOn && (
+              <button
+                onClick={async () => {
+                  const res = await notificationsApi.test(token);
+                  if (!res.ok) alert(`Test failed: ${res.reason}`);
+                }}
+                className="mt-1 font-label-sm text-primary hover:underline"
+              >
+                Send test notification
+              </button>
+            )}
           </div>
         </div>
         <Toggle

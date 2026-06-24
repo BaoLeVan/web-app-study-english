@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import type { ReviewResult } from '@repo/types';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ProgressService } from '../progress/progress.service';
 import { addDays, computeSrs } from './srs.algorithm';
 
 @Injectable()
 export class SrsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly progress: ProgressService,
+  ) {}
 
   /**
    * Build today's review queue: due "FORGOT"/scheduled words first, then new
@@ -40,26 +44,35 @@ export class SrsService {
     const next = computeSrs(prev, result);
     const nextReviewAt = addDays(new Date(), next.intervalDays);
 
-    return this.prisma.reviewSchedule.upsert({
-      where: { userWordId },
-      create: {
-        userWordId,
-        intervalDays: next.intervalDays,
-        easeFactor: next.easeFactor,
-        repetitions: next.repetitions,
-        nextReviewAt,
-        lastResult: result,
-        lastReviewAt: new Date(),
-      },
-      update: {
-        intervalDays: next.intervalDays,
-        easeFactor: next.easeFactor,
-        repetitions: next.repetitions,
-        nextReviewAt,
-        lastResult: result,
-        lastReviewAt: new Date(),
-      },
-    });
+    // A word is "newly learned" the first time it goes from no-schedule to
+    // REMEMBERED — that's when we credit Progress.wordsLearned.
+    const firstRemember = !word.schedule && result === 'REMEMBERED';
+
+    const [schedule] = await this.prisma.$transaction([
+      this.prisma.reviewSchedule.upsert({
+        where: { userWordId },
+        create: {
+          userWordId,
+          intervalDays: next.intervalDays,
+          easeFactor: next.easeFactor,
+          repetitions: next.repetitions,
+          nextReviewAt,
+          lastResult: result,
+          lastReviewAt: new Date(),
+        },
+        update: {
+          intervalDays: next.intervalDays,
+          easeFactor: next.easeFactor,
+          repetitions: next.repetitions,
+          nextReviewAt,
+          lastResult: result,
+          lastReviewAt: new Date(),
+        },
+      }),
+    ]);
+
+    await this.progress.recordReview(userId, { result, firstRemember });
+    return schedule;
   }
 
   /** Round-robin interleave so new words are spread through the due ones. */

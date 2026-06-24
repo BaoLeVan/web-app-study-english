@@ -4,7 +4,9 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { ProgressModule } from './modules/progress/progress.module';
 import { SrsModule } from './modules/srs/srs.module';
+import { VocabularyModule } from './modules/vocabulary/vocabulary.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
@@ -14,7 +16,9 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     PrismaModule,
     AuthModule,
     UsersModule,
+    ProgressModule,
     SrsModule,
+    VocabularyModule,
     NotificationsModule,
   ],
 })
