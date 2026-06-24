@@ -3,9 +3,14 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const ACHIEVEMENTS = [
-  { code: 'grammar_guru', title: 'Grammar Guru', description: 'Completed 50 grammar lessons with 90%+ accuracy.', icon: 'emoji_events' },
-  { code: 'global_citizen', title: 'Global Citizen', description: "Mastered the 'Countries and Cities' vocabulary set.", icon: 'public' },
-  { code: 'polyglot_path', title: 'Polyglot Path', description: 'Maintain a 30-day streak to unlock.', icon: 'lock' },
+  { code: 'first_word', title: 'First Word', description: 'Learn your very first word.', icon: 'auto_awesome' },
+  { code: 'vocab_50', title: 'Vocabulary Builder', description: 'Learn 50 words.', icon: 'library_books' },
+  { code: 'vocab_200', title: 'Vocabulary Master', description: 'Learn 200 words.', icon: 'auto_stories' },
+  { code: 'streak_7', title: 'Weekly Warrior', description: 'Maintain a 7-day streak.', icon: 'local_fire_department' },
+  { code: 'streak_30', title: 'Polyglot Path', description: 'Maintain a 30-day streak.', icon: 'workspace_premium' },
+  { code: 'first_speak', title: 'First Words Out Loud', description: 'Complete your first speaking attempt.', icon: 'mic' },
+  { code: 'dictation_50', title: 'Sharp Ears', description: 'Get 50 dictation answers right.', icon: 'hearing' },
+  { code: 'points_1000', title: 'Point Collector', description: 'Earn 1000 total points.', icon: 'star' },
 ];
 
 const TOPICS = [

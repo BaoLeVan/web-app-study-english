@@ -18,7 +18,7 @@ export function TopNav() {
   const initial = (me?.firstName?.[0] ?? '?').toUpperCase();
 
   return (
-    <header className="fixed right-0 top-0 z-40 flex h-20 w-[calc(100%-260px)] items-center justify-between border-b border-white/20 bg-surface/70 px-container-padding shadow-sm backdrop-blur-xl">
+    <header className="fixed right-0 top-0 z-40 hidden h-20 w-[calc(100%-260px)] items-center justify-between border-b border-white/20 bg-surface/70 px-container-padding shadow-sm backdrop-blur-xl lg:flex">
       {/* Left: search */}
       <div className="flex flex-1 items-center gap-4">
         <div className="relative w-64 rounded-full border border-white bg-white/50 shadow-inner backdrop-blur-md transition-all focus-within:ring-2 focus-within:ring-primary/50">

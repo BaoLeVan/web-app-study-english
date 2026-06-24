@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ProgressService } from './progress.service';
 
@@ -14,5 +14,11 @@ export class ProgressController {
   @Get('me')
   me(@Req() req: AuthedRequest) {
     return this.progress.getSummary(req.user.userId);
+  }
+
+  @Get('series')
+  series(@Req() req: AuthedRequest, @Query('days') days?: string) {
+    const n = days ? Math.min(Math.max(parseInt(days, 10), 1), 365) : 30;
+    return this.progress.getSeries(req.user.userId, n);
   }
 }

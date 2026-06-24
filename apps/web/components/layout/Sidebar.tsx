@@ -15,7 +15,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-full w-sidebar-width flex-col overflow-hidden rounded-r-[3rem] bg-inverse-surface py-8 shadow-xl">
+    <aside className="fixed left-0 top-0 z-50 hidden h-full w-sidebar-width flex-col overflow-hidden rounded-r-[3rem] bg-inverse-surface py-8 shadow-xl lg:flex">
       {/* Brand */}
       <div className="mb-12 flex items-center gap-3 px-8">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary-container text-white shadow-lg shadow-primary/20">
