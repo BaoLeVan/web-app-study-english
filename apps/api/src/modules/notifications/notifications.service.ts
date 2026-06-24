@@ -43,4 +43,24 @@ export class NotificationsService implements OnModuleInit {
       this.logger.warn(`Push failed for ${userId}: ${String(err)}`);
     }
   }
+
+  /** Fire a one-off test notification so the user can verify their subscription. */
+  async sendTest(userId: string) {
+    if (!this.configured) return { ok: false, reason: 'VAPID not configured' };
+    const settings = await this.prisma.userSettings.findUnique({ where: { userId } });
+    if (!settings?.pushSubscription) return { ok: false, reason: 'No subscription' };
+
+    const payload = JSON.stringify({
+      title: 'LinguoFlow test',
+      body: 'Push notifications are working.',
+      url: '/settings',
+    });
+    try {
+      await webpush.sendNotification(settings.pushSubscription as unknown as webpush.PushSubscription, payload);
+      return { ok: true };
+    } catch (err) {
+      this.logger.warn(`Test push failed for ${userId}: ${String(err)}`);
+      return { ok: false, reason: String(err) };
+    }
+  }
 }
