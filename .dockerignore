@@ -1,0 +1,14 @@
+.git
+.gitignore
+.github
+node_modules
+**/node_modules
+**/.next
+**/dist
+**/.turbo
+**/coverage
+**/.env
+**/.env.local
+README.md
+design
+.claude

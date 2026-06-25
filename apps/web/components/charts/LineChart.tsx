@@ -100,11 +100,11 @@ export function LineChart({ data, color = 'rgb(186, 104, 200)', height = 200 }: 
       })}
 
       {/* Y-axis labels */}
-      {[0, Math.round(maxVal / 2), maxVal].map((val) => {
+      {[0, Math.round(maxVal / 2), maxVal].map((val, idx) => {
         const y = padding.top + chartHeight - (val / maxVal) * chartHeight;
         return (
           <text
-            key={val}
+            key={idx}
             x={padding.left - 10}
             y={y + 4}
             fill="rgba(255,255,255,0.6)"
