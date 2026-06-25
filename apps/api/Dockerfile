@@ -2,7 +2,7 @@
 # Multi-stage build for the NestJS API.
 #
 # Stage 1: install all workspace deps using the lockfile (cacheable).
-# Stage 2: build apps/api + generate prisma client.
+# Stage 2: build packages/types + apps/api + generate prisma client.
 # Stage 3: production image with only what we need to run dist/main.js.
 
 ARG NODE_VERSION=20-alpine
@@ -27,6 +27,7 @@ COPY --from=deps /repo/packages/config/node_modules ./packages/config/node_modul
 COPY --from=deps /repo/packages/types/node_modules ./packages/types/node_modules
 COPY --from=deps /repo/apps/api/node_modules ./apps/api/node_modules
 COPY . .
+RUN pnpm --filter @repo/types build
 RUN pnpm --filter api prisma:generate
 RUN pnpm --filter api build
 
@@ -44,6 +45,8 @@ COPY --from=builder /repo/apps/api/prisma                        ./prisma
 COPY --from=builder /repo/node_modules                           ./node_modules
 COPY --from=builder /repo/apps/api/node_modules                  ./apps/api_node_modules
 COPY --from=builder /repo/apps/api/package.json                  ./package.json
+COPY --from=builder /repo/packages/types/dist                    ./packages/types/dist
+COPY --from=builder /repo/packages/types/package.json            ./packages/types/package.json
 EXPOSE 4000
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]

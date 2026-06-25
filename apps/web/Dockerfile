@@ -18,9 +18,11 @@ FROM node:${NODE_VERSION} AS builder
 WORKDIR /repo
 RUN corepack enable
 COPY --from=deps /repo/node_modules ./node_modules
+COPY --from=deps /repo/packages/types/node_modules ./packages/types/node_modules
 COPY --from=deps /repo/apps/web/node_modules ./apps/web/node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+RUN pnpm --filter @repo/types build
 RUN pnpm --filter web build
 
 FROM node:${NODE_VERSION} AS runner

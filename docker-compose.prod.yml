@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-linguoflow}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set me}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?132456}
       POSTGRES_DB: ${POSTGRES_DB:-linguoflow}
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -36,7 +36,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-linguoflow}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-linguoflow}?schema=public
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      JWT_SECRET: ${JWT_SECRET:?set me}
+      JWT_SECRET: ${JWT_SECRET:?Do8q4JpVmM0UST7pIvpGUMXdXMH0wlF0z6RHXm6d1XQ}
       WEB_ORIGIN: ${WEB_ORIGIN:-http://localhost:3000}
       VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
       VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}

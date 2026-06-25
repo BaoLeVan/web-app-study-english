@@ -81,7 +81,7 @@ export class AuthService {
 
   private async issueTokens(userId: string, email: string) {
     const payload = { sub: userId, email };
-    const accessToken = await this.jwt.signAsync(payload, { expiresIn: '15m' });
+    const accessToken = await this.jwt.signAsync(payload, { expiresIn: '1h' });
     const refreshToken = await this.jwt.signAsync(payload, { expiresIn: `${REFRESH_TTL_DAYS}d` });
 
     const expiresAt = new Date();
